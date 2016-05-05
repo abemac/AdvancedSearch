@@ -1,0 +1,10 @@
+echo "Building Project..."
+make
+echo " "
+echo "-----------------------------"
+echo " "
+read -p "Press [Enter] key to run..."
+cd ..
+cd run
+echo "Program Output:"
+./mac_output
