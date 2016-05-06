@@ -8,7 +8,7 @@ int main(){
   string q;
   cout<<"Input Query String"<<endl;
   cin>>q>>endl;
-
+  
   ofstream file;
   file.open("txt41.txt");
   int length=0;
