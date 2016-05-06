@@ -1,7 +1,7 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
-#include "project2/HashedObj.h"
+#include "HashedObj.h"
 #include <iostream>
 #include <vector>
 

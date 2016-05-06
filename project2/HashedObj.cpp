@@ -1,4 +1,4 @@
-#include "project2/HashedObj.h"
+#include "HashedObj.h"
 
 
 /*

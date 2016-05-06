@@ -1,4 +1,4 @@
-#include "project2/HashTable.h"
+#include "HashTable.h"
 /**
 This class provides the implementation of HashTable.h.  See the documention
 in the header file for more details.

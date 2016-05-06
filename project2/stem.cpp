@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "project2/HashTable.h"
+#include "HashTable.h"
 using namespace std;
 
 
