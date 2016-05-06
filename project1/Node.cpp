@@ -4,7 +4,7 @@
  *  Created on: Apr 5, 2016
  *      Author: SuperG
  */
-#include "project1/Node.h"
+#include "Node.h"
 using namespace std;
 Node::Node(string name2){
 	/*

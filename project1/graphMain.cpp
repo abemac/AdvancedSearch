@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "project1/Graph.h"
+#include "Graph.h"
 #include <sstream>
 //#include "Node.h"
 using namespace std;
@@ -25,7 +25,7 @@ void graphMain(){
 	readFile();
 
 	buildGraph();
-  
+
 }//end main
 
 

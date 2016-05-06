@@ -9,7 +9,7 @@
 #define GRAPH_H_
 #include <string>
 #include <vector>
-#include "project1/Node.h"
+#include "Node.h"
 using namespace std;
 
 /*
