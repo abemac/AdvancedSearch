@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "HashTable.h"
+#include "project2/HashTable.h"
 using namespace std;
 
 
@@ -41,17 +41,13 @@ void porter5b(string& check);//porter step 5b
 
 void runCmdLineProgram();//runds command line program
 void printInstructions();//prints instructions fro command line program
-
+void stem();
 /*
 	main function
 */
-int main(){
+void stem(){
 	init();
-
-	runCmdLineProgram();
-
-
-	return 0;
+  stemPorterAlg();
 }
 
 /*
