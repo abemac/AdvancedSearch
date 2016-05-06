@@ -14,16 +14,16 @@ void graphMain();
 
 ////////////////////////////////////////////////////
 //fuctions used for the command line program
-void printInstructions();//prints instructions for command line program
+//void printInstructions();//prints instructions for command line program
 bool processUsrInput(string usrInput);//process user input
 string formatInput(string usrInput); //formats string input to match our graph data
 bool isValidInput(string usrInput);//checks if the input is valid
-void runCmdLineProgram();
+//void runCmdLineProgram();
 ////////////////////////////////
 void graphMain(){
-
+	cout<<"1"<<endl;
 	readFile();
-
+	cout<<"1"<<endl;
 	buildGraph();
 
 }//end main
@@ -36,7 +36,7 @@ void readFile(){
 	int x=0;
 	char c;
 	fstream textfile;
-	textfile.open("graph_hyponymy.txt");
+	textfile.open("../project1/graph_hyponymy.txt");
 
 	while (!textfile.eof()){
 		c=textfile.get();//assign a char to c
@@ -126,33 +126,33 @@ void buildGraph(){
 /*
  * Start screen
  */
-void runCmdLineProgram(){
-	bool goOn = true;
-	cout<<"\n**Welcome to Abraham and Qichao's Taxonomy Graph Program**\n"<<endl;
-	printInstructions();
-	string usrInput;
-
-	while(goOn){
-			cout<<"\nEnter a command (h for help):";
-			cin>>usrInput;
-			goOn=processUsrInput(usrInput);
-
-	}
-}
+// void runCmdLineProgram(){
+// 	bool goOn = true;
+// 	cout<<"\n**Welcome to Abraham and Qichao's Taxonomy Graph Program**\n"<<endl;
+// 	printInstructions();
+// 	string usrInput;
+//
+// 	while(goOn){
+// 			cout<<"\nEnter a command (h for help):";
+// 			cin>>usrInput;
+// 			goOn=processUsrInput(usrInput);
+//
+// 	}
+// }
 
 /*
  * print Instructions
  */
-void printInstructions(){
-	cout<<"Instructions:"<<endl;
-	cout<<"\t help (h) :  \t\t     show these instructions again"<<endl;
-	cout<<"\t citeSubtypes (cst):   \t     cite the number of subtypes a certain order"<<endl;
-	cout<<"\t numSubSpecies (nss): \t     find number of subspecies of a type"<<endl;
-	cout<<"\t lowestCommonAncestor (lca): find lowest common ancsestor of \n\t\t\t\t     two types starting from another type"<<endl;
-	cout<<"\n\t quit (q): \t\t     quit program"<<endl;
-	cout<<"\n\t NOTE: use \"_\" for any spaces needed to input"<<endl;
-	cout<<"\t NOTE: after each command is typed, prompts will appear to enter\n\t       parameters"<<endl;
-}
+// void printInstructions(){
+// 	cout<<"Instructions:"<<endl;
+// 	cout<<"\t help (h) :  \t\t     show these instructions again"<<endl;
+// 	cout<<"\t citeSubtypes (cst):   \t     cite the number of subtypes a certain order"<<endl;
+// 	cout<<"\t numSubSpecies (nss): \t     find number of subspecies of a type"<<endl;
+// 	cout<<"\t lowestCommonAncestor (lca): find lowest common ancsestor of \n\t\t\t\t     two types starting from another type"<<endl;
+// 	cout<<"\n\t quit (q): \t\t     quit program"<<endl;
+// 	cout<<"\n\t NOTE: use \"_\" for any spaces needed to input"<<endl;
+// 	cout<<"\t NOTE: after each command is typed, prompts will appear to enter\n\t       parameters"<<endl;
+// }
 
 /*
  * convert users input to machine readable data
