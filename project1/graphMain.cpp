@@ -10,6 +10,7 @@ vector<string> input=vector<string>();//vector stores all the input from text fi
 Graph graph= Graph();//graph
 void readFile();//function reads text from file and store in input
 void buildGraph();//function build Graph using input vector
+void graphMain();
 
 ////////////////////////////////////////////////////
 //fuctions used for the command line program
@@ -19,16 +20,12 @@ string formatInput(string usrInput); //formats string input to match our graph d
 bool isValidInput(string usrInput);//checks if the input is valid
 void runCmdLineProgram();
 ////////////////////////////////
-int main(){
+void graphMain(){
 
 	readFile();
 
 	buildGraph();
-
-	runCmdLineProgram();
-
-
-
+  
 }//end main
 
 
