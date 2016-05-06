@@ -2,18 +2,25 @@
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
 using namespace std;
-
+void readFiles();
+int wordCount();
+vector<string> dict;
+vector<double> frequence;
+void inputQuery();
 int main(){
-
-  stem();
   graphMain();
+  void inputQuery()
+  stem();
+
+}
+
+void inputQuery(){
   string q;
   cout<<"Input Query String"<<endl;
   cin>>q;
 
   ofstream file;
-  file.open("txt41.txt");
-  file>>q;
+  file.open("../texts/txt41.txt");
+  file<<q;
   file.close();
-
 }
