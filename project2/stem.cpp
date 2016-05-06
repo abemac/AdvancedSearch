@@ -47,7 +47,7 @@ void stem();
 */
 void stem(){
 	init();
-  stemPorterAlg();
+  processDirectory();
 }
 
 /*
@@ -628,15 +628,15 @@ void writeFile(){
 	//paths are different in Windows/ MAC/ Linux
 	if(os.compare("Windows")==0){
 		if(fileNum<10){
-			path="corpus\\txt0"+to_string(fileNum)+"_cleaned.txt";
+			path="..\\corpus\\txt0"+to_string(fileNum)+"_cleaned.txt";
 		}else{
-			path="corpus\\txt"+to_string(fileNum)+"_cleaned.txt";
+			path="..\\corpus\\txt"+to_string(fileNum)+"_cleaned.txt";
 		}
 	}else{
 		if(fileNum<10){
-			path="corpus/txt0"+to_string(fileNum)+"_cleaned.txt";
+			path="../corpus/txt0"+to_string(fileNum)+"_cleaned.txt";
 		}else{
-			path="corpus/txt"+to_string(fileNum)+"_cleaned.txt";
+			path="../corpus/txt"+to_string(fileNum)+"_cleaned.txt";
 		}
 	}
 	ofstream file;
