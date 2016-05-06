@@ -5,11 +5,15 @@ using namespace std;
 void readFiles();
 int wordCount();
 vector<string> dict;
-vector<double> frequence;
+vector<double> sizes;
 void inputQuery();
+void readWords();
+
+
+
 int main(){
   graphMain();
-  void inputQuery()
+  void inputQuery();
   stem();
 
 }
@@ -23,4 +27,7 @@ void inputQuery(){
   file.open("../texts/txt41.txt");
   file<<q;
   file.close();
+}
+
+void readwords(){
 }
