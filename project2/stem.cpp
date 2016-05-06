@@ -660,7 +660,7 @@ void writeFile(){
 	note that for each iteration,  the vector currentFile is reused for all functions.
 */
 void processDirectory(){
-	while(fileNum<=40){
+	while(fileNum<=41){
 		currentFile.clear();
 		string path =getFileName();
 		cout<<path<<endl;
