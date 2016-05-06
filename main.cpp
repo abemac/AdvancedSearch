@@ -9,7 +9,7 @@ vector<double> frequence;
 void inputQuery();
 int main(){
   graphMain();
-  void inputQuery()
+  void inputQuery();
   stem();
 
 }
