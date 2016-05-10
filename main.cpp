@@ -8,7 +8,8 @@ vector<string> dict;
 double frequency[];
 int * docNum[];
 void inputQuery();
-void readWords();
+void readDict();
+void isThere(string word);
 
 
 
@@ -33,4 +34,11 @@ void inputQuery(){
 
 void readDict(){
 
+}
+void isThere(string word){
+  for(int i=0; i<dict.size(); i++){
+    if(dict[i].compare(word)==0){
+      return true;
+    }
+  }
 }
