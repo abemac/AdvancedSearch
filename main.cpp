@@ -8,7 +8,7 @@ void readFiles();
 vector<string> dict;
 vector<string>query;
 int getIndex(string word);
-
+vector<string> splitString(vector<string> dirty);
 int NUM_DOCS=40;
 
 double **frequency;   //frequency[0] = query frequencies
@@ -43,6 +43,8 @@ int main(){
   for(unsigned int j=0;j<40;j++){
     frequency[j]=new double[dict.size()];
   }
+
+
   for (unsigned int i=0; i<40; i++){
     for(int j=0; j<dict.size();j++){
       frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
@@ -58,11 +60,6 @@ void inputQuery(){
   string q;
   cout<<"Input Query String"<<endl;
   cin>>q;
-
-  ofstream file;
-  file.open("../texts/txt41.txt");
-  file<<q;
-  file.close();
 }
 
 
@@ -228,7 +225,7 @@ double computeDocRank(int docNum){
 
 
 
-vector<string> loadsubtypes(vector<string> dirty){
+vector<string> splitString(vector<string> dirty){
   vector<string> clean;
   for(int i=0;i<dirty.size();i++){
     string line = dirty[i];
