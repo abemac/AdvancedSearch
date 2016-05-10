@@ -5,7 +5,8 @@ using namespace std;
 void readFiles();
 int wordCount();
 vector<string> dict;
-vector<double> sizes;
+double frequency[];
+int * docNum[];
 void inputQuery();
 void readWords();
 
@@ -15,6 +16,7 @@ int main(){
   graphMain();
   void inputQuery();
   stem();
+
 
 }
 
@@ -29,5 +31,6 @@ void inputQuery(){
   file.close();
 }
 
-void readwords(){
+void read(){
+
 }
