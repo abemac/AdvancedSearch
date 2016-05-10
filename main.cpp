@@ -262,9 +262,7 @@ double computeDocDistance(int docNum){
   for (unsigned int i = 0;i<dict.size();i++){
     distance+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
   }
-  cout<<distance;
   distance = sqrt(distance);
-  cout<<distance;
   return distance;
 }
 
