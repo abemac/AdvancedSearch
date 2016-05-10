@@ -21,9 +21,7 @@ bool isValidInput(string usrInput);//checks if the input is valid
 //void runCmdLineProgram();
 ////////////////////////////////
 void graphMain(){
-	cout<<"1"<<endl;
 	readFile();
-	cout<<"1"<<endl;
 	buildGraph();
 
 }//end main

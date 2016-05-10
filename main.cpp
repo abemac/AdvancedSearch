@@ -9,6 +9,9 @@ vector<string> dict;
 vector<string>query;
 int getIndex(string word);
 vector<string> splitString(vector<string> dirty);
+vector<string> lastDoc;
+int lastDocNum=-1;
+
 int NUM_DOCS=40;
 
 double **frequency;   //frequency[0] = query frequencies
@@ -20,47 +23,69 @@ void inputQuery();
 void loadDict();
 bool isThere(string word);
 double getFrequency(int i, string word);
-int wordCounts[40];
+double getQueryFrequency(string word);
+int wordCounts[41];
 
 void search();
 double computeDocRank(int docNum);
 struct RANK{
   RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
+  RANK(){};
   int doc;
   int docRank;
 
 };
 bool RANKcompare(RANK lhs, RANK rhs);
-
-
 void inputQuery();
+
+
 int main(){
-  //graphMain();
-  //inputQuery();
-  //stem();
+  graphMain();
+  inputQuery();
+  stem();
   loadDict();
-  frequency =new double*[40];
-  for(unsigned int j=0;j<40;j++){
+  frequency =new double*[41];
+  for(unsigned int j=0;j<41;j++){
     frequency[j]=new double[dict.size()];
   }
-
-
-  for (unsigned int i=0; i<40; i++){
-    for(int j=0; j<dict.size();j++){
+  for (unsigned int i=1; i<41; i++){
+    for(unsigned int j=0; j<dict.size();j++){
       frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
-
     }
   }
+  for(unsigned int j=0; j<dict.size();j++){
+    frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
+  }
+  for(unsigned int k=0;k<dict.size();k++){
+    cout<<"freqency of "<<dict[k]<<" is: "<<frequency[2][k]<<endl;
+  }
+
+
 
   return 0;
 
 }
 
 void inputQuery(){
-  string q;
-  cout<<"Input Query String"<<endl;
-  cin>>q;
+  char input[100];
+  cout<<"Input Query String: ";
+  cin.getline(input,sizeof(input));
+  vector<string> tmp;
+  tmp.push_back(input);
+  query = splitString(tmp);
+  query = processQuery(query);
 }
+double getQueryFrequency(string word){
+  int count=0;
+  for(string s: query){
+    if(s.compare(word)==0){
+      count++;
+    }
+  }
+
+  return count;
+}
+
 
 
 void loadDict(){
@@ -83,13 +108,14 @@ void loadDict(){
   		}
     }
 
-    int count=0;
+    int wordCount=0;
   	char c;
   	fstream textfile;
   	textfile.open(path);
     string word="";
   	while (!textfile.eof()){
   			c=textfile.get();//assign a char to c
+
   			while(c==' '){
   				c=textfile.get();
   			}
@@ -100,14 +126,15 @@ void loadDict(){
   					word=word+c;//build words char by char
   				c=textfile.get();
   			}
-        count++;
-        if(!isThere(word)){
+        if(word.size()!=0)
+          wordCount++;
+        if(!isThere(word) && word.size()!=0){
           dict.push_back(word);
         }
         word="";
   	}
-    wordCounts[i]=count;
-    count=0;
+    wordCounts[i]=wordCount;
+    wordCount=0;
 
   	textfile.close();
 
@@ -115,7 +142,7 @@ void loadDict(){
 }
 
 bool isThere(string word){
-  for(int i=0; i<dict.size(); i++){
+  for(unsigned int i=0; i<dict.size(); i++){
     if(dict[i].compare(word)==0){
       return true;
     }
@@ -124,7 +151,7 @@ bool isThere(string word){
 
 }
 int getIndex(string word){
-  for (int i=0; i<dict.size(); i++){
+  for (unsigned int i=0; i<dict.size(); i++){
     if(dict[i].compare(word)==0){
       return i;
     }
@@ -132,7 +159,22 @@ int getIndex(string word){
   return -1;
 
 }
+
+
+
 double getFrequency(int i, string word){
+  if(lastDocNum==i){
+    double count=0;
+    for(string s : lastDoc){
+      if(s.compare(word)==0){
+        count++;
+      }
+    }
+    return count;
+  }
+
+  lastDoc.clear();
+
   string path;
   if(os.compare("Windows")==0){
     if(i<10){
@@ -150,7 +192,6 @@ double getFrequency(int i, string word){
       path="../corpus/txt"+to_string(i)+"_cleaned.txt";
     }
   }
-
   int count=0;
   char c;
   fstream textfile;
@@ -168,13 +209,14 @@ double getFrequency(int i, string word){
           x=x+c;//build words char by char
         c=textfile.get();
       }
+      lastDoc.push_back(x);
       if(x.compare(word)==0){
         count++;
       }
       x="";
   }
-
   textfile.close();
+  lastDocNum=i;
   return count;
 }
 
@@ -193,7 +235,7 @@ void search(){
   for(int i=1;i<NUM_DOCS;i++){
     docRanks[i]=RANK(i,computeDocRank(i));
   }
-  sort(RANK,RANK+NUM_DOCS,RANKcompare);
+  sort(docRanks,docRanks+NUM_DOCS,RANKcompare);
   //check if below Threshold T
 
   cout<<"Document Ranking:"<<endl;
@@ -209,7 +251,7 @@ void search(){
 
 double computeDocRank(int docNum){
   double rank=0;
-  for (int i = 0;i<dict.size();i++){
+  for (unsigned int i = 0;i<dict.size();i++){
     rank+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
   }
   rank = sqrt(rank);
@@ -220,11 +262,11 @@ double computeDocRank(int docNum){
 
 vector<string> splitString(vector<string> dirty){
   vector<string> clean;
-  for(int i=0;i<dirty.size();i++){
+  for(unsigned int i=0;i<dirty.size();i++){
     string line = dirty[i];
-    int k=0;
-    for(int j=0; j< line.size();j++){
-        if(line[j] == '_'){
+    unsigned int k=0;
+    for(unsigned int j=0; j< line.size();j++){
+        if(line[j] == '_' || line[j] == ' '){
           clean.push_back(line.substr(k,j-k));
               k=j+1;
         }
