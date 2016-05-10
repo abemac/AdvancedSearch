@@ -305,7 +305,7 @@ vector<string> splitString(vector<string> dirty){
 //   for(int k =0; k < clean.size(); k++){
 //     query.push_back(clean[k]);
 //   }
-=======
+
 vector<string> addingSubtypes(vector<string> query){
   vector<string> additions;
   vector<string> temp;
@@ -332,4 +332,3 @@ vector<string> addingSubtypes(vector<string> query){
   }
   return processQuery(query);
 }
->>>>>>> 6c38dd87b94f00c1a74d3f89a05338c60b858fe6
