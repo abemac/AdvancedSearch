@@ -663,7 +663,7 @@ void processDirectory(){
 	while(fileNum<=40){
 		currentFile.clear();
 		string path =getFileName();
-		cout<<path<<endl;
+		//cout<<path<<endl;
 		readFile(path);//reads text file into currentFile vector
 		rmStopWords();//removes stop words
 		stemPorterAlg();//applies Porter algorithm for stemmming

@@ -31,10 +31,8 @@ int wordCounts[41];
 void search();
 double computeDocDistance(int docNum);
 struct RANK{
-  RANK(int doc_,int distance_):doc{doc_},distance{distance_}{};
-  RANK(){};
   int doc;
-  int distance;
+  double distance;
 
 };
 bool RANKcompare(RANK lhs, RANK rhs);
@@ -58,9 +56,9 @@ int main(){
   for(unsigned int j=0; j<dict.size();j++){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
-  for(unsigned int k=0;k<dict.size();k++){
-    cout<<"freqency of "<<dict[k]<<" is: "<<frequency[0][k]<<endl;
-  }
+  // for(unsigned int k=0;k<dict.size();k++){
+  //   cout<<"freqency of "<<dict[k]<<" is: "<<frequency[0][k]<<endl;
+  // }
 
 
   search();
@@ -77,6 +75,10 @@ void inputQuery(){
   tmp.push_back(input);
   query = splitString(tmp);
   query = processQuery(query);
+
+  for(string s: query){
+    cout<<s<<endl;
+  }
 }
 double getQueryFrequency(string word){
   int count=0;
@@ -231,14 +233,17 @@ double getFrequency(int i, string word){
 
 
 
-bool RANKcompare(RANK lhs, RANK rhs) { return lhs.distance < rhs.distance; }
+bool RANKcompare(const RANK lhs, const RANK rhs) { return lhs.distance < rhs.distance; }
 
 void search(){
-  RANK docRanks[41];
+  vector<RANK> docRanks;
   for(int i=1;i<41;i++){
-    docRanks[i]=RANK(i,computeDocDistance(i));
+    RANK tmp;
+    tmp.doc=i;
+    tmp.distance=computeDocDistance(i);
+    docRanks.push_back(tmp);
   }
-  //sort(docRanks,docRanks+NUM_DOCS,RANKcompare);
+  sort(docRanks.begin(),docRanks.end(),RANKcompare);
   //check if below Threshold T
 
   cout<<"Document Ranking:"<<endl;
