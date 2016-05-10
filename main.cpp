@@ -6,6 +6,7 @@ using namespace std;
 void readFiles();
 vector<string> dict;
 vector<string>query;
+int getIndex(string word);
 
 int NUM_DOCS=40;
 
@@ -32,7 +33,7 @@ int main(){
   for (string i : dict){
     cout<<i<<endl;
   }
-  cout<<dict.size()<<endl
+  cout<<dict.size()<<endl;
   return 0;
 
 }
@@ -111,6 +112,13 @@ bool isThere(string word){
   return false;
 
 }
+int getIndex(string word){
+  for (int i=0; i<dict.size(); i++){
+    if(dict[i].compare(word)==0){
+      return i;
+    }
+  }
+}
 
 
 // double **frequency;   //frequency[0] = query frequencies
@@ -122,7 +130,7 @@ void search(){
   struct RANK{
     int doc;
     int docRank;
-  }
+  };
   vector<RANK> docRanks;
   for(int i=1;i<NUM_DOCS;i++){
     docRanks.push_back();
