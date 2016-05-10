@@ -3,18 +3,14 @@
 #include "project1/Graph.h"
 using namespace std;
 void readFiles();
-<<<<<<< HEAD
+
 void wordCount(vector<double> g);
 vector<string> dict;
 
-//double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
-=======
-vector<string> dict;
 
-double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+//double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
                       //frequency[0][1] = frequency of first document, word in dict[1]
                       //frequency[1][1] = frequency of second document, word in dict[1]
->>>>>>> 7e48045c3da61f3bd6b37f59a0cdd0530553dfd7
 
 void inputQuery();
 void loadDict();
@@ -25,11 +21,14 @@ void computeDocRank(int doc,int word);
 
 void inputQuery();
 int main(){
-  graphMain();
+  //graphMain();
   //inputQuery();
-  stem();
+  //stem();
 
   loadDict();
+  for (string i : dict){
+    cout<<i<<endl;
+  }
   cout<<dict.size()<<endl;
   return 0;
 
@@ -46,27 +45,24 @@ void inputQuery(){
   file.close();
 }
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 7e48045c3da61f3bd6b37f59a0cdd0530553dfd7
 void loadDict(){
-  for(int i=0; i<40; i++){
+  for(int i=1; i<40; i++){
     string path;
     if(os.compare("Windows")==0){
-  		if(fileNum<10){
-  			path="corpus\\txt0"+to_string(i+1)+"_cleaned.txt";
+  		if(i<10){
+  			path="..\\corpus\\txt0"+to_string(i)+"_cleaned.txt";
   		}
       else{
-  			path="corpus\\txt"+to_string(i+1)+"_cleaned.txt";
+  			path="..\\corpus\\txt"+to_string(i)+"_cleaned.txt";
   		}
   	}
     else{
-  		if(fileNum<10){
-  			path="corpus/txt0"+to_string(i+1)+"_cleaned.txt";
-  		}else{
-  			path="corpus/txt"+to_string(i+1)+"_cleaned.txt";
+  		if(i<10){
+  			path="../corpus/txt0"+to_string(i)+"_cleaned.txt";
+  		}
+      else{
+  			path="../corpus/txt"+to_string(i)+"_cleaned.txt";
   		}
     }
 
@@ -95,20 +91,24 @@ void loadDict(){
   			else{
   				x++;
   			}
+        word="";
   	}
-
+    cout<<"there"<<endl;
   	textfile.close();
 
   }
 }
+
 bool isThere(string word){
   for(int i=0; i<dict.size(); i++){
     if(dict[i].compare(word)==0){
       return true;
     }
   }
+  return false;
 
 }
+
 
 
 
