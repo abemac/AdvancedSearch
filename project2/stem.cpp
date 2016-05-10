@@ -674,11 +674,14 @@ void processDirectory(){
 	fileNum=1;
 }
 
-string processString(string s){
+vector<string> processQuery(vector<string> query){
 		currentFile.clear();
-		currentFile.push_back(s);
+		for (string s: query){
+			currentFile.push_back(s);
+		}
 		rmStopWords();
-
+		stemPorterAlg();
+		return currentFile;
 }
 
 /*
