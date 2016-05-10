@@ -130,12 +130,8 @@ void search(){
   struct RANK{
     RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
     int docRank;
-<<<<<<< HEAD
-  };
-=======
     int doc;
-  }
->>>>>>> 4faf3add8373180ea634e427947facb95803c1ba
+  };
   vector<RANK> docRanks;
   for(int i=1;i<NUM_DOCS;i++){
     docRanks.push_back(RANK(i,computeDocRank(i)));
