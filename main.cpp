@@ -9,30 +9,20 @@ void wordCount(vector<double> g);
 vector<string> dict;
 vector<string>query;
 
-<<<<<<< HEAD
 int NUM_DOCS=40;
 
 double **frequency;   //frequency[0] = query frequencies
                       //frequency[1][0] = frequency of first document, word in dict[0]
                       //frequency[1][1] = frequency of first document, word in dict[1]
                       //frequency[2][1] = frequency of second document, word in dict[1]
-=======
-
-double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
-                      //frequency[0][1] = frequency of first document, word in dict[1]
-                      //frequency[1][1] = frequency of second document, word in dict[1]
->>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
 
 void inputQuery();
 void loadDict();
 bool isThere(string word);
 
 void search();
-<<<<<<< HEAD
 double computeDocRank(int docNum);
-=======
-void computeDocRank(int doc,int word);
->>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
+
 
 void inputQuery();
 int main(){
@@ -130,17 +120,6 @@ bool isThere(string word){
 //                       //frequency[1][1] = frequency of first document, word in dict[1]
 //                       //frequency[2][1] = frequency of second document, word in dict[1]
 
-
-<<<<<<< HEAD
-=======
-// double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
-//                       //frequency[0][1] = frequency of first document, word in dict[1]
-//                       //frequency[1][1] = frequency of second document, word in dict[1]
-
-void search(){
-  vector<double> docRanks;
->>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
-
 void search(){
   struct RANK{
     int doc;
@@ -148,10 +127,10 @@ void search(){
   }
   vector<RANK> docRanks;
   for(int i=1;i<NUM_DOCS;i++){
-    
+
   }
 }
-<<<<<<< HEAD
+
 
 double computeDocRank(int docNum){
   double rank=0;
@@ -161,5 +140,3 @@ double computeDocRank(int docNum){
   rank = sqrt(rank);
   return rank;
 }
-=======
->>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
