@@ -9,6 +9,7 @@ vector<string> dict;
 vector<string>query;
 int getIndex(string word);
 vector<string> splitString(vector<string> dirty);
+vector<string> addingSubtypes(vector<string> query);
 int NUM_DOCS=40;
 
 double **frequency;   //frequency[0] = query frequencies
@@ -235,3 +236,28 @@ vector<string> splitString(vector<string> dirty){
   }
   return clean;
 }
+
+vector<string> addingSubtypes(vector<string> query){
+  vector<string> additions;
+  vector<string> temp;
+
+  for(int i =0; i< query.size();i++){
+      temp= citeSubtypes(query[i],3,1);
+      for(int j=0;j<temp.size();j++){
+        if(additions.size() < 3){
+          additions.push_back(temp[j]);
+        }
+        if(additions.size() == 3){
+          break;
+        }
+      }
+
+      if(additions.size() == 3){
+        break;
+      }
+  }
+
+   vector<string> clean = splitString(additions);
+  for(int k =0; k < clean.size(); k++){
+    query.push_back(clean[k]);
+  }
