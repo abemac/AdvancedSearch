@@ -8,8 +8,8 @@ vector<string> dict;
 double frequency[];
 int * docNum[];
 void inputQuery();
-void readDict();
-void isThere(string word);
+void loadDict();
+bool isThere(string word);
 
 
 
@@ -32,10 +32,10 @@ void inputQuery(){
   file.close();
 }
 
-void readDict(){
+void loadDict(){
 
 }
-void isThere(string word){
+bool isThere(string word){
   for(int i=0; i<dict.size(); i++){
     if(dict[i].compare(word)==0){
       return true;
