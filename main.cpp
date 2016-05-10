@@ -3,10 +3,10 @@
 #include "project1/Graph.h"
 using namespace std;
 void readFiles();
-void wordCount(vector<doubles> g);
+void wordCount(vector<double> g);
 vector<string> dict;
 
-double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+//double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
 
 void inputQuery();
 void loadDict();
@@ -21,6 +21,7 @@ int main(){
   stem();
 
   loadDict();
+  cout<<dict.size()<<endl;
   return 0;
 
 }
@@ -34,39 +35,6 @@ void inputQuery(){
   file.open("../texts/txt41.txt");
   file<<q;
   file.close();
-}
-
-
-void  wordCount(){
-  int total;
-  string path;
-  string line;
-  string length;
-  count=1;
-  while(count < 42){
-
-    if(fileNum<10){
-      path="../corpus/txt0"+count+"_cleaned.txt";
-    }
-    else{
-      path="../corpus/txt"+count+"_cleaned.txt";
-    }
-
-    ifstream myFile(path);
-    if( myFile.is_open()){
-      length=line.size();
-      int i =0;
-      while(i < length){
-
-      }
-    }
-    else{
-      cout<<"NOT FOUND"<<endl;
-    }
-
-    counts[i-1]=total;
-    count++;
-    total = 0;
 }
 
 void loadDict(){
