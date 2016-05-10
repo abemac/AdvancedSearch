@@ -129,7 +129,7 @@ int getIndex(string word){
 
 }
 double getFrequency(int i, string word){
-  
+
 }
 
 
@@ -143,18 +143,6 @@ double getFrequency(int i, string word){
 bool RANKcompare(RANK lhs, RANK rhs) { return lhs.docRank > rhs.docRank; }
 
 void search(){
-<<<<<<< HEAD
-=======
-  struct RANK{
-    RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
-    int docRank;
-    int doc;
-  };
-  vector<RANK> docRanks;
-  for(int i=1;i<NUM_DOCS;i++){
-    docRanks.push_back(RANK(i,computeDocRank(i)));
->>>>>>> 11d612eec6da7f0ac425e41d6fd80e3974cfce65
-
   RANK docRanks[NUM_DOCS];
   for(int i=1;i<NUM_DOCS;i++){
     docRanks[i]=RANK(i,computeDocRank(i));
