@@ -285,7 +285,7 @@ vector<string> addingSubtypes(vector<string> query){
   vector<string> temp;
 
   for(int i =0; i< query.size();i++){
-      temp= citeSubtypes(query[i],3,1);
+      temp= graph.citeSubtypes(query[i],3,1);
       for(int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           additions.push_back(temp[j]);
@@ -304,3 +304,5 @@ vector<string> addingSubtypes(vector<string> query){
   for(int k =0; k < clean.size(); k++){
     query.push_back(clean[k]);
   }
+  return processQuery(query);
+}
