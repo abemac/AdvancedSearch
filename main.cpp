@@ -14,7 +14,7 @@ void readWords();
 
 int main(){
   graphMain();
-  void inputQuery();
+  inputQuery();
   stem();
 
 
