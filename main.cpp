@@ -280,6 +280,7 @@ vector<string> splitString(vector<string> dirty){
   return clean;
 }
 
+<<<<<<< HEAD
 // vector<string> addingSubtypes(vector<string> query){
 //   vector<string> additions;
 //   vector<string> temp;
@@ -304,3 +305,31 @@ vector<string> splitString(vector<string> dirty){
 //   for(int k =0; k < clean.size(); k++){
 //     query.push_back(clean[k]);
 //   }
+=======
+vector<string> addingSubtypes(vector<string> query){
+  vector<string> additions;
+  vector<string> temp;
+
+  for(int i =0; i< query.size();i++){
+      temp= graph.citeSubtypes(query[i],3,1);
+      for(int j=0;j<temp.size();j++){
+        if(additions.size() < 3){
+          additions.push_back(temp[j]);
+        }
+        if(additions.size() == 3){
+          break;
+        }
+      }
+
+      if(additions.size() == 3){
+        break;
+      }
+  }
+
+   vector<string> clean = splitString(additions);
+  for(int k =0; k < clean.size(); k++){
+    query.push_back(clean[k]);
+  }
+  return processQuery(query);
+}
+>>>>>>> 6c38dd87b94f00c1a74d3f89a05338c60b858fe6
