@@ -38,10 +38,10 @@ int main(){
   //inputQuery();
   //stem();
   loadDict();
-  frequency =double[40][dict.size()];   //frequency[0] = query frequencies
-                        //frequency[1][0] = frequency of first document, word in dict[0]
-                        //frequency[1][1] = frequency of first document, word in dict[1]
-                        //frequency[2][1] = frequency of second document, word in dict[1]
+  frequency =new double*[40];
+  for(unsigned int j=0;j<40;j++){
+    frequency[j]=new double[dict.size()];
+  }
   for (unsigned int i=0; i<40; i++){
     for(int j=0; j<dict.size();j++){
       frequency[i][j]= getFrequency(i,dict[j]);
