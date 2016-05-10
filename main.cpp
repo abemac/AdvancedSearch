@@ -5,16 +5,21 @@ using namespace std;
 void readFiles();
 vector<string> dict;
 
-double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+double **frequency;  //frequency[0][0] = frequency of first document, word in dict[0]
                       //frequency[0][1] = frequency of first document, word in dict[1]
                       //frequency[1][1] = frequency of second document, word in dict[1]
+
+//create for number of docs: frequency = new double *[numDocs];
+//add frequencies to document 1: frequencies[0]= new double[numberOfWords];
+
+
 
 void inputQuery();
 void loadDict();
 bool isThere(string word);
 
 void search();
-void computeDocRank(int doc,int word);
+double computeDocRank(int doc);
 
 void inputQuery();
 int main(){
@@ -107,5 +112,9 @@ bool isThere(string word){
 
 void search(){
   vector<double> docRanks;
+
+}
+
+double computeDocRank(int doc){
 
 }
