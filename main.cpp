@@ -7,8 +7,7 @@ using namespace std;
 void readFiles();
 void wordCount(vector<doubles> g);
 vector<string> dict;
-double frequency[];
-int * docNum[];
+double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
 void inputQuery();
 void loadDict();
 bool isThere(string word);
