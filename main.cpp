@@ -7,13 +7,28 @@ using namespace std;
 void readFiles();
 void wordCount(vector<doubles> g);
 vector<string> dict;
+<<<<<<< HEAD
 vector<double> counts;
+=======
+double frequency[];
+int * docNum[];
+void inputQuery();
+void loadDict();
+bool isThere(string word);
+
+
+>>>>>>> 7c7e2776a06acf421f39effbcf12758cc147596f
 
 void inputQuery();
 int main(){
   graphMain();
+<<<<<<< HEAD
   void inputQuery()
+=======
+  inputQuery();
+>>>>>>> 7c7e2776a06acf421f39effbcf12758cc147596f
   stem();
+
 
 }
 
@@ -28,6 +43,7 @@ void inputQuery(){
   file.close();
 }
 
+<<<<<<< HEAD
 
 void  wordCount(){
   int total;
@@ -63,4 +79,15 @@ void  wordCount(){
 
 
 
+=======
+void loadDict(){
+
+}
+bool isThere(string word){
+  for(int i=0; i<dict.size(); i++){
+    if(dict[i].compare(word)==0){
+      return true;
+    }
+  }
+>>>>>>> 7c7e2776a06acf421f39effbcf12758cc147596f
 }
