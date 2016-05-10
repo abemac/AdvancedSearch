@@ -1,16 +1,6 @@
 #include "project2/stem.cpp"
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
-<<<<<<< HEAD
-
-=======
-
-#include <vector>
-
-#include <ifstream>
-
-
->>>>>>> de379deb1a8372536b6104190a371538b0d39173
 using namespace std;
 void readFiles();
 void wordCount(vector<doubles> g);
@@ -32,10 +22,7 @@ int main(){
 
   loadDict();
   return 0;
-<<<<<<< HEAD
-=======
 
->>>>>>> de379deb1a8372536b6104190a371538b0d39173
 }
 
 void inputQuery(){
