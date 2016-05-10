@@ -2,6 +2,7 @@
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
 #include <cmath>
+#include <alogrithm>
 using namespace std;
 void readFiles();
 vector<string> dict;
@@ -20,7 +21,12 @@ bool isThere(string word);
 
 void search();
 double computeDocRank(int docNum);
-
+bool RANKcompare(RANK lhs, RANK rhs);
+struct RANK{
+  RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
+  int docRank;
+  int doc;
+}
 
 void inputQuery();
 int main(){
@@ -118,17 +124,30 @@ bool isThere(string word){
 //                       //frequency[1][1] = frequency of first document, word in dict[1]
 //                       //frequency[2][1] = frequency of second document, word in dict[1]
 
-void search(){
-  struct RANK{
-    RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
-    int docRank;
-    int doc;
-  }
-  vector<RANK> docRanks;
-  for(int i=1;i<NUM_DOCS;i++){
-    docRanks.push_back(RANK(i,computeDocRank(i)));
 
+
+bool RANKcompare(RANK lhs, RANK rhs) { return lhs.docRank > rhs.docRank; }
+
+void search(){
+
+  RANK docRanks[NUM_DOCS];
+  for(int i=1;i<NUM_DOCS;i++){
+    docRanks[i]=RANK(i,computeDocRank(i));
   }
+  sort(RANK,RANK+NUM_DOCS,RANKcompare);
+  //check if below Threshold T
+
+  cout<<"Document Ranking:"<<endl;
+  cout<<docRanks[1].doc<<endl;
+  cout<<docRanks[2].doc<<endl;
+  cout<<docRanks[3].doc<<endl;
+  cout<<docRanks[4].doc<<endl;
+  cout<<docRanks[5].doc<<endl;
+  cout<<docRanks[6].doc<<endl;
+
+
+
+
 }
 
 
@@ -140,6 +159,8 @@ double computeDocRank(int docNum){
   rank = sqrt(rank);
   return rank;
 }
+
+
 
 vector<string> loadsubtypes(vector<string> dirty){
   vector<string> clean;
