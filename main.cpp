@@ -3,7 +3,6 @@
 #include "project1/Graph.h"
 using namespace std;
 void readFiles();
-void wordCount(vector<doubles> g);
 vector<string> dict;
 
 double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
@@ -15,6 +14,7 @@ void loadDict();
 bool isThere(string word);
 
 void search();
+void computeDocRank(int doc,)
 
 void inputQuery();
 int main(){
@@ -39,37 +39,6 @@ void inputQuery(){
 }
 
 
-void  wordCount(){
-  int total;
-  string path;
-  string line;
-  string length;
-  count=1;
-  while(count < 42){
-
-    if(fileNum<10){
-      path="../corpus/txt0"+count+"_cleaned.txt";
-    }
-    else{
-      path="../corpus/txt"+count+"_cleaned.txt";
-    }
-
-    ifstream myFile(path);
-    if( myFile.is_open()){
-      length=line.size();
-      int i =0;
-      while(i < length){
-
-      }
-    }
-    else{
-      cout<<"NOT FOUND"<<endl;
-    }
-
-    counts[i-1]=total;
-    count++;
-    total = 0;
-}
 
 void loadDict(){
   for(int i=0; i<40; i++){
