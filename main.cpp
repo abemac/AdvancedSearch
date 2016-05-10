@@ -214,9 +214,6 @@ void search(){
   cout<<docRanks[5].doc<<endl;
   cout<<docRanks[6].doc<<endl;
 
-
-
-
 }
 
 
