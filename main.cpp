@@ -5,38 +5,46 @@
 using namespace std;
 void readFiles();
 
+void wordCount(vector<double> g);
 vector<string> dict;
 vector<string>query;
 
+<<<<<<< HEAD
 int NUM_DOCS=40;
 
 double **frequency;   //frequency[0] = query frequencies
                       //frequency[1][0] = frequency of first document, word in dict[0]
                       //frequency[1][1] = frequency of first document, word in dict[1]
                       //frequency[2][1] = frequency of second document, word in dict[1]
+=======
 
-
-//create for number of docs: frequency = new double *[numDocs];
-//add frequencies to document 1: frequencies[0]= new double[numberOfWords];
-
+double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+                      //frequency[0][1] = frequency of first document, word in dict[1]
+                      //frequency[1][1] = frequency of second document, word in dict[1]
+>>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
 
 void inputQuery();
 void loadDict();
 bool isThere(string word);
 
 void search();
+<<<<<<< HEAD
 double computeDocRank(int docNum);
+=======
+void computeDocRank(int doc,int word);
+>>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
 
 void inputQuery();
-
-
 int main(){
-  graphMain();
+  //graphMain();
   //inputQuery();
-  stem();
+  //stem();
 
   loadDict();
-  cout<<dict.size()<<endl;
+  for (string i : dict){
+    cout<<i<<endl;
+  }
+  cout<<dict.size()<<endl
   return 0;
 
 }
@@ -52,22 +60,24 @@ void inputQuery(){
   file.close();
 }
 
+
 void loadDict(){
-  for(int i=0; i<40; i++){
+  for(int i=1; i<40; i++){
     string path;
     if(os.compare("Windows")==0){
-  		if(fileNum<10){
-  			path="corpus\\txt0"+to_string(i+1)+"_cleaned.txt";
+  		if(i<10){
+  			path="..\\corpus\\txt0"+to_string(i)+"_cleaned.txt";
   		}
       else{
-  			path="corpus\\txt"+to_string(i+1)+"_cleaned.txt";
+  			path="..\\corpus\\txt"+to_string(i)+"_cleaned.txt";
   		}
   	}
     else{
-  		if(fileNum<10){
-  			path="corpus/txt0"+to_string(i+1)+"_cleaned.txt";
-  		}else{
-  			path="corpus/txt"+to_string(i+1)+"_cleaned.txt";
+  		if(i<10){
+  			path="../corpus/txt0"+to_string(i)+"_cleaned.txt";
+  		}
+      else{
+  			path="../corpus/txt"+to_string(i)+"_cleaned.txt";
   		}
     }
 
@@ -96,12 +106,14 @@ void loadDict(){
   			else{
   				x++;
   			}
+        word="";
   	}
-
+    cout<<"there"<<endl;
   	textfile.close();
 
   }
 }
+
 bool isThere(string word){
   for(int i=0; i<dict.size(); i++){
     if(dict[i].compare(word)==0){
@@ -119,6 +131,15 @@ bool isThere(string word){
 //                       //frequency[2][1] = frequency of second document, word in dict[1]
 
 
+<<<<<<< HEAD
+=======
+// double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+//                       //frequency[0][1] = frequency of first document, word in dict[1]
+//                       //frequency[1][1] = frequency of second document, word in dict[1]
+
+void search(){
+  vector<double> docRanks;
+>>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
 
 void search(){
   struct RANK{
@@ -130,6 +151,7 @@ void search(){
     
   }
 }
+<<<<<<< HEAD
 
 double computeDocRank(int docNum){
   double rank=0;
@@ -139,3 +161,5 @@ double computeDocRank(int docNum){
   rank = sqrt(rank);
   return rank;
 }
+=======
+>>>>>>> ced910bb7ddce7690d9584d3d3f7baafa2f40e49
