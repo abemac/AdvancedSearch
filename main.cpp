@@ -120,12 +120,13 @@ bool isThere(string word){
 
 void search(){
   struct RANK{
-    int doc;
+    RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
     int docRank;
+    int doc;
   }
   vector<RANK> docRanks;
   for(int i=1;i<NUM_DOCS;i++){
-    docRanks.push_back();
+    docRanks.push_back(RANK(i,computeDocRank(i)));
 
   }
 }
