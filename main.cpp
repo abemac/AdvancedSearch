@@ -14,7 +14,7 @@ void loadDict();
 bool isThere(string word);
 
 void search();
-void computeDocRank(int doc,)
+void computeDocRank(int doc,int word);
 
 void inputQuery();
 int main(){
