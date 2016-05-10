@@ -133,7 +133,6 @@ int getIndex(string word){
 
 }
 double getFrequency(int i, string word){
-<<<<<<< HEAD
   string path;
   if(os.compare("Windows")==0){
     if(i<10){
@@ -177,9 +176,6 @@ double getFrequency(int i, string word){
 
   textfile.close();
   return count;
-=======
-
->>>>>>> 240a39c0f0c9f734ab844e41fa3b205b7a2c3a00
 }
 
 
