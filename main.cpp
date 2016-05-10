@@ -1,12 +1,6 @@
 #include "project2/stem.cpp"
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
-
-#include <vector>
-
-#include <ifstream>
-
-
 using namespace std;
 void readFiles();
 void wordCount(vector<doubles> g);
