@@ -7,22 +7,19 @@ using namespace std;
 void readFiles();
 void wordCount(vector<doubles> g);
 vector<string> dict;
-
 double frequency[];
 int * docNum[];
 void inputQuery();
 void loadDict();
 bool isThere(string word);
 
-
+void search();
 
 void inputQuery();
 int main(){
   graphMain();
   inputQuery();
   stem();
-
-
 }
 
 void inputQuery(){
@@ -78,5 +75,14 @@ bool isThere(string word){
       return true;
     }
   }
+
+}
+
+
+
+
+
+void search(){
+  vector<double> docRanks;
 
 }
