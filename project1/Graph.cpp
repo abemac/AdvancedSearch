@@ -68,8 +68,9 @@ void Graph::printBFS(int startIndex){
 
 //answer to question methods
 //*******************************
-void Graph::citeSubtypes(string sp,int num,int order){
+vector<string> Graph::citeSubtypes(string sp,int num,int order){
   initializeBFS();
+  vector<string> sub;
   list<Node*> queue = list<Node*>();
   queue.push_front(findVertice(sp));//finds the vertice with name 'sp'
   queue.back()->distanceFromSource=0;//'sp' is 0 away from itself
@@ -89,6 +90,7 @@ void Graph::citeSubtypes(string sp,int num,int order){
 			  n->distanceFromSource=tmp->distanceFromSource+1;//sets the distance from 'sp'
 			  if(n->distanceFromSource==order && numPrinted<num){ //prints this vertice if applicable
 				  cout<<n->getName()<<" (order: "<<n->distanceFromSource<<")"<<endl;
+          sub.push_back(n->getName);
 				  numPrinted++;
           if(numPrinted >= num){
             stop=true;
