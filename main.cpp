@@ -4,8 +4,6 @@
 #include <cmath>
 using namespace std;
 void readFiles();
-
-void wordCount(vector<double> g);
 vector<string> dict;
 vector<string>query;
 
@@ -127,6 +125,7 @@ void search(){
   }
   vector<RANK> docRanks;
   for(int i=1;i<NUM_DOCS;i++){
+    docRanks.push_back();
 
   }
 }
