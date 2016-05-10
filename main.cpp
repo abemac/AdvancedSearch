@@ -138,7 +138,9 @@ bool isThere(string word){
 
 
 
-
+// double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+//                       //frequency[0][1] = frequency of first document, word in dict[1]
+//                       //frequency[1][1] = frequency of second document, word in dict[1]
 
 void search(){
   vector<double> docRanks;
