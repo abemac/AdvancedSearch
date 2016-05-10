@@ -31,6 +31,6 @@ void inputQuery(){
   file.close();
 }
 
-void read(){
+void readDict(){
 
 }
