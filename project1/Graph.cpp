@@ -105,7 +105,7 @@ vector<string> Graph::citeSubtypes(string sp,int num,int order){
 
 	  }
   }
-
+return sub;
 }
 
 int Graph::numSubSpecies(string sp,int order){
