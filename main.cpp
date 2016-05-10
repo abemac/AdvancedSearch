@@ -14,6 +14,7 @@ void inputQuery();
 void loadDict();
 bool isThere(string word);
 double getFrequency(int i, string word);
+int wordCounts[40];
 
 void search();
 double computeDocRank(int docNum);
@@ -25,13 +26,10 @@ int main(){
   //inputQuery();
   //stem();
   loadDict();
-  double frequency[40][dict.size()];   //frequency[0] = query frequencies
-                        //frequency[1][0] = frequency of first document, word in dict[0]
-                        //frequency[1][1] = frequency of first document, word in dict[1]
-                        //frequency[2][1] = frequency of second document, word in dict[1]
-  for (int i=0; i<40; i++){
-    for(int j=0; j<dict.size();j++){
-      frequency[i][j]= getFrequency(i,dict[j]);
+  double frequency[40][dict.size()];
+  for(int i=0; i<NUM_DOCS; i++){
+    for (int j=0; j<dict.size(); j++){
+      frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
     }
   }
 
@@ -71,7 +69,7 @@ void loadDict(){
   		}
     }
 
-    int x=0;
+    int count=0;
   	char c;
   	fstream textfile;
   	textfile.open(path);
@@ -88,17 +86,15 @@ void loadDict(){
   					word=word+c;//build words char by char
   				c=textfile.get();
   			}
+        count++;
         if(!isThere(word)){
           dict.push_back(word);
         }
-  			if(dict.size()==0)
-  				dict.pop_back();
-  			else{
-  				x++;
-  			}
         word="";
   	}
-    cout<<"there"<<endl;
+    wordCounts[i]=count;
+    count=0;
+
   	textfile.close();
 
   }
@@ -123,7 +119,49 @@ int getIndex(string word){
 
 }
 double getFrequency(int i, string word){
-  
+  string path;
+  if(os.compare("Windows")==0){
+    if(i<10){
+      path="..\\corpus\\txt0"+to_string(i)+"_cleaned.txt";
+    }
+    else{
+      path="..\\corpus\\txt"+to_string(i)+"_cleaned.txt";
+    }
+  }
+  else{
+    if(i<10){
+      path="../corpus/txt0"+to_string(i)+"_cleaned.txt";
+    }
+    else{
+      path="../corpus/txt"+to_string(i)+"_cleaned.txt";
+    }
+  }
+
+  int count=0;
+  char c;
+  fstream textfile;
+  textfile.open(path);
+  string x="";
+  while (!textfile.eof()){
+      c=textfile.get();//assign a char to c
+      while(c==' '){
+        c=textfile.get();
+      }
+      //x.push_back("");//create a new space for new word
+      while((c!=',' && c!=' ' && c!='\n') && !textfile.eof()){//split words by ',' ' ' '\n'
+
+        if(c>=97&& c<=122)//only include letters
+          x=x+c;//build words char by char
+        c=textfile.get();
+      }
+      if(x.compare(word)==0){
+        count++;
+      }
+      x="";
+  }
+
+  textfile.close();
+  return count;
 }
 
 
