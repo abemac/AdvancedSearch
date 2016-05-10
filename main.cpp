@@ -2,6 +2,7 @@
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
 #include <cmath>
+#include <algorithm>
 using namespace std;
 void readFiles();
 vector<string> dict;
@@ -9,6 +10,11 @@ vector<string>query;
 int getIndex(string word);
 
 int NUM_DOCS=40;
+
+double **frequency;   //frequency[0] = query frequencies
+//                       //frequency[1][0] = frequency of first document, word in dict[0]
+//                       //frequency[1][1] = frequency of first document, word in dict[1]
+//                       //frequency[2][1] = frequency of second document, word in dict[1]
 
 void inputQuery();
 void loadDict();
@@ -18,6 +24,13 @@ int wordCounts[40];
 
 void search();
 double computeDocRank(int docNum);
+struct RANK{
+  RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
+  int doc;
+  int docRank;
+
+};
+bool RANKcompare(RANK lhs, RANK rhs);
 
 
 void inputQuery();
@@ -26,10 +39,20 @@ int main(){
   //inputQuery();
   //stem();
   loadDict();
+<<<<<<< HEAD
   double frequency[40][dict.size()];
   for(int i=0; i<NUM_DOCS; i++){
     for (int j=0; j<dict.size(); j++){
       frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
+=======
+  frequency =new double*[40];
+  for(unsigned int j=0;j<40;j++){
+    frequency[j]=new double[dict.size()];
+  }
+  for (unsigned int i=0; i<40; i++){
+    for(int j=0; j<dict.size();j++){
+      frequency[i][j]= getFrequency(i,dict[j]);
+>>>>>>> 240a39c0f0c9f734ab844e41fa3b205b7a2c3a00
     }
   }
 
@@ -119,6 +142,7 @@ int getIndex(string word){
 
 }
 double getFrequency(int i, string word){
+<<<<<<< HEAD
   string path;
   if(os.compare("Windows")==0){
     if(i<10){
@@ -162,6 +186,9 @@ double getFrequency(int i, string word){
 
   textfile.close();
   return count;
+=======
+
+>>>>>>> 240a39c0f0c9f734ab844e41fa3b205b7a2c3a00
 }
 
 
@@ -170,17 +197,29 @@ double getFrequency(int i, string word){
 //                       //frequency[1][1] = frequency of first document, word in dict[1]
 //                       //frequency[2][1] = frequency of second document, word in dict[1]
 
-void search(){
-  struct RANK{
-    RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
-    int docRank;
-    int doc;
-  };
-  vector<RANK> docRanks;
-  for(int i=1;i<NUM_DOCS;i++){
-    docRanks.push_back(RANK(i,computeDocRank(i)));
 
+
+bool RANKcompare(RANK lhs, RANK rhs) { return lhs.docRank > rhs.docRank; }
+
+void search(){
+  RANK docRanks[NUM_DOCS];
+  for(int i=1;i<NUM_DOCS;i++){
+    docRanks[i]=RANK(i,computeDocRank(i));
   }
+  sort(RANK,RANK+NUM_DOCS,RANKcompare);
+  //check if below Threshold T
+
+  cout<<"Document Ranking:"<<endl;
+  cout<<docRanks[1].doc<<endl;
+  cout<<docRanks[2].doc<<endl;
+  cout<<docRanks[3].doc<<endl;
+  cout<<docRanks[4].doc<<endl;
+  cout<<docRanks[5].doc<<endl;
+  cout<<docRanks[6].doc<<endl;
+
+
+
+
 }
 
 
@@ -192,6 +231,8 @@ double computeDocRank(int docNum){
   rank = sqrt(rank);
   return rank;
 }
+
+
 
 vector<string> loadsubtypes(vector<string> dirty){
   vector<string> clean;
