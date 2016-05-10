@@ -39,20 +39,14 @@ int main(){
   //inputQuery();
   //stem();
   loadDict();
-<<<<<<< HEAD
-  double frequency[40][dict.size()];
-  for(int i=0; i<NUM_DOCS; i++){
-    for (int j=0; j<dict.size(); j++){
-      frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
-=======
   frequency =new double*[40];
   for(unsigned int j=0;j<40;j++){
     frequency[j]=new double[dict.size()];
   }
   for (unsigned int i=0; i<40; i++){
     for(int j=0; j<dict.size();j++){
-      frequency[i][j]= getFrequency(i,dict[j]);
->>>>>>> 240a39c0f0c9f734ab844e41fa3b205b7a2c3a00
+      frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
+
     }
   }
 
