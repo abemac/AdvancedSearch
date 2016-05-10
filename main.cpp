@@ -1,13 +1,22 @@
 #include "project2/stem.cpp"
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
+<<<<<<< HEAD
+#include <vector>
+=======
 #include <ifstream>
 
+>>>>>>> f300ed461c2d68d79f00ef5934e75ea7619ac2fc
 using namespace std;
 void readFiles();
 void wordCount(vector<doubles> g);
 vector<string> dict;
+<<<<<<< HEAD
 double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+=======
+//double frequency[];
+//int * docNum[];
+>>>>>>> 95d3e1d251c494c558b1d68e97626821f41281ae
 void inputQuery();
 void loadDict();
 bool isThere(string word);
@@ -17,8 +26,13 @@ void search();
 void inputQuery();
 int main(){
   graphMain();
-  inputQuery();
+  //inputQuery();
   stem();
+<<<<<<< HEAD
+  loadDict();
+  return 0;
+=======
+>>>>>>> f300ed461c2d68d79f00ef5934e75ea7619ac2fc
 }
 
 void inputQuery(){
@@ -66,7 +80,54 @@ void  wordCount(){
 }
 
 void loadDict(){
+  for(int i=0; i<40; i++){
+    string path;
+    if(os.compare("Windows")==0){
+  		if(fileNum<10){
+  			path="corpus\\txt0"+to_string(i+1)+"_cleaned.txt";
+  		}
+      else{
+  			path="corpus\\txt"+to_string(i+1)+"_cleaned.txt";
+  		}
+  	}
+    else{
+  		if(fileNum<10){
+  			path="corpus/txt0"+to_string(i+1)+"_cleaned.txt";
+  		}else{
+  			path="corpus/txt"+to_string(i+1)+"_cleaned.txt";
+  		}
+    }
 
+    int x=0;
+  	char c;
+  	fstream textfile;
+  	textfile.open(path);
+    string word="";
+  	while (!textfile.eof()){
+  			c=textfile.get();//assign a char to c
+  			while(c==' '){
+  				c=textfile.get();
+  			}
+  			//word.push_back("");//create a new space for new word
+  			while((c!=',' && c!=' ' && c!='\n') && !textfile.eof()){//split words by ',' ' ' '\n'
+
+  				if(c>=97&& c<=122)//only include letters
+  					word=word+c;//build words char by char
+  				c=textfile.get();
+  			}
+        if(!isThere(word)){
+          dict.push_back(word);
+        }
+  			if(dict.size()==0)
+  				dict.pop_back();
+  			else{
+  				x++;
+  			}
+  	}
+
+  	textfile.close();
+
+  }
 }
 bool isThere(string word){
   for(int i=0; i<dict.size(); i++){
