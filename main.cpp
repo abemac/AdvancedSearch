@@ -139,3 +139,21 @@ double computeDocRank(int docNum){
   rank = sqrt(rank);
   return rank;
 }
+
+vector<string> loadsubtypes(vector<string> dirty){
+  vector<string> clean;
+  for(int i=0;i<dirty.size();i++){
+    string line = dirty[i];
+    int k=0;
+    for(int j=0; j< line.size();j++){
+        if(line[j] == '_'){
+          clean.push_back(line.substr(k,j-k));
+              k=j+1;
+        }
+        if(j+1 == line.size()){
+          clean.push_back(line.substr(k,j-k+1));
+        }
+    }
+  }
+  return clean;
+}
