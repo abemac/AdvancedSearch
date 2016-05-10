@@ -29,12 +29,12 @@ double getQueryFrequency(string word);
 int wordCounts[41];
 
 void search();
-double computeDocRank(int docNum);
+double computeDocDistance(int docNum);
 struct RANK{
-  RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
+  RANK(int doc_,int distance_):doc{doc_},distance{distance_}{};
   RANK(){};
   int doc;
-  int docRank;
+  int distance;
 
 };
 bool RANKcompare(RANK lhs, RANK rhs);
@@ -59,8 +59,9 @@ int main(){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
   for(unsigned int k=0;k<dict.size();k++){
-    cout<<"freqency of "<<dict[k]<<" is: "<<frequency[2][k]<<endl;
+    cout<<"freqency of "<<dict[k]<<" is: "<<frequency[0][k]<<endl;
   }
+
 
   search();
 
@@ -230,34 +231,36 @@ double getFrequency(int i, string word){
 
 
 
-bool RANKcompare(RANK lhs, RANK rhs) { return lhs.docRank > rhs.docRank; }
+bool RANKcompare(RANK lhs, RANK rhs) { return lhs.distance < rhs.distance; }
 
 void search(){
-  RANK docRanks[NUM_DOCS];
-  for(int i=1;i<NUM_DOCS;i++){
-    docRanks[i]=RANK(i,computeDocRank(i));
+  RANK docRanks[41];
+  for(int i=1;i<41;i++){
+    docRanks[i]=RANK(i,computeDocDistance(i));
   }
-  sort(docRanks,docRanks+NUM_DOCS,RANKcompare);
+  //sort(docRanks,docRanks+NUM_DOCS,RANKcompare);
   //check if below Threshold T
 
   cout<<"Document Ranking:"<<endl;
-  cout<<docRanks[1].doc<<endl;
-  cout<<docRanks[2].doc<<endl;
-  cout<<docRanks[3].doc<<endl;
-  cout<<docRanks[4].doc<<endl;
-  cout<<docRanks[5].doc<<endl;
-  cout<<docRanks[6].doc<<endl;
+  cout<<docRanks[1].doc<<": "<<docRanks[1].distance<<endl;
+  cout<<docRanks[2].doc<<": "<<docRanks[2].distance<<endl;
+  cout<<docRanks[3].doc<<": "<<docRanks[3].distance<<endl;
+  cout<<docRanks[4].doc<<": "<<docRanks[4].distance<<endl;
+  cout<<docRanks[5].doc<<": "<<docRanks[5].distance<<endl;
+  cout<<docRanks[6].doc<<": "<<docRanks[6].distance<<endl;
 
 }
 
 
-double computeDocRank(int docNum){
-  double rank=0;
+double computeDocDistance(int docNum){
+  double distance=0;
   for (unsigned int i = 0;i<dict.size();i++){
-    rank+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
+    distance+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
   }
-  rank = sqrt(rank);
-  return rank;
+  cout<<distance;
+  distance = sqrt(distance);
+  cout<<distance;
+  return distance;
 }
 
 
@@ -280,39 +283,14 @@ vector<string> splitString(vector<string> dirty){
   return clean;
 }
 
-<<<<<<< HEAD
-// vector<string> addingSubtypes(vector<string> query){
-//   vector<string> additions;
-//   vector<string> temp;
-//
-//   for(unsigned int i =0; i< query.size();i++){
-//       temp= graph.citeSubtypes(query[i],3,1);
-//       for(int j=0;j<temp.size();j++){
-//         if(additions.size() < 3){
-//           additions.push_back(temp[j]);
-//         }
-//         if(additions.size() == 3){
-//           break;
-//         }
-//       }
-//
-//       if(additions.size() == 3){
-//         break;
-//       }
-//   }
-//
-//    vector<string> clean = splitString(additions);
-//   for(int k =0; k < clean.size(); k++){
-//     query.push_back(clean[k]);
-//   }
-=======
+
 vector<string> addingSubtypes(vector<string> query){
   vector<string> additions;
   vector<string> temp;
 
-  for(int i =0; i< query.size();i++){
+  for(unsigned int i =0; i< query.size();i++){
       temp= graph.citeSubtypes(query[i],3,1);
-      for(int j=0;j<temp.size();j++){
+      for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           additions.push_back(temp[j]);
         }
@@ -327,9 +305,8 @@ vector<string> addingSubtypes(vector<string> query){
   }
 
    vector<string> clean = splitString(additions);
-  for(int k =0; k < clean.size(); k++){
+  for(unsigned int k =0; k < clean.size(); k++){
     query.push_back(clean[k]);
   }
   return processQuery(query);
 }
->>>>>>> 6c38dd87b94f00c1a74d3f89a05338c60b858fe6
