@@ -1,22 +1,19 @@
 #include "project2/stem.cpp"
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
-<<<<<<< HEAD
+
 #include <vector>
-=======
+
 #include <ifstream>
 
->>>>>>> f300ed461c2d68d79f00ef5934e75ea7619ac2fc
+
 using namespace std;
 void readFiles();
 void wordCount(vector<doubles> g);
 vector<string> dict;
-<<<<<<< HEAD
+
 double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
-=======
-//double frequency[];
-//int * docNum[];
->>>>>>> 95d3e1d251c494c558b1d68e97626821f41281ae
+
 void inputQuery();
 void loadDict();
 bool isThere(string word);
@@ -28,11 +25,10 @@ int main(){
   graphMain();
   //inputQuery();
   stem();
-<<<<<<< HEAD
+
   loadDict();
   return 0;
-=======
->>>>>>> f300ed461c2d68d79f00ef5934e75ea7619ac2fc
+
 }
 
 void inputQuery(){
