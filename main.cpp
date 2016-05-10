@@ -2,7 +2,7 @@
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
 #include <cmath>
-#include <alogrithm>
+#include <algorithm>
 using namespace std;
 void readFiles();
 vector<string> dict;
@@ -11,6 +11,11 @@ int getIndex(string word);
 
 int NUM_DOCS=40;
 
+double **frequency;   //frequency[0] = query frequencies
+//                       //frequency[1][0] = frequency of first document, word in dict[0]
+//                       //frequency[1][1] = frequency of first document, word in dict[1]
+//                       //frequency[2][1] = frequency of second document, word in dict[1]
+
 void inputQuery();
 void loadDict();
 bool isThere(string word);
@@ -18,12 +23,14 @@ double getFrequency(int i, string word);
 
 void search();
 double computeDocRank(int docNum);
-bool RANKcompare(RANK lhs, RANK rhs);
 struct RANK{
   RANK(int doc_,int docRank_):doc{doc_},docRank{docRank_}{};
-  int docRank;
   int doc;
-}
+  int docRank;
+
+};
+bool RANKcompare(RANK lhs, RANK rhs);
+
 
 void inputQuery();
 int main(){
@@ -31,11 +38,11 @@ int main(){
   //inputQuery();
   //stem();
   loadDict();
-  double frequency[40][dict.size()];   //frequency[0] = query frequencies
+  frequency =double[40][dict.size()];   //frequency[0] = query frequencies
                         //frequency[1][0] = frequency of first document, word in dict[0]
                         //frequency[1][1] = frequency of first document, word in dict[1]
                         //frequency[2][1] = frequency of second document, word in dict[1]
-  for (int i=0; i<40; i++){
+  for (unsigned int i=0; i<40; i++){
     for(int j=0; j<dict.size();j++){
       frequency[i][j]= getFrequency(i,dict[j]);
     }
