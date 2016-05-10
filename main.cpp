@@ -1,14 +1,19 @@
 #include "project2/stem.cpp"
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
+#include <cmath>
 using namespace std;
 void readFiles();
 
 vector<string> dict;
+vector<string>query;
 
-double **frequency;  //frequency[0][0] = frequency of first document, word in dict[0]
-                      //frequency[0][1] = frequency of first document, word in dict[1]
-                      //frequency[1][1] = frequency of second document, word in dict[1]
+int NUM_DOCS=40;
+
+double **frequency;   //frequency[0] = query frequencies
+                      //frequency[1][0] = frequency of first document, word in dict[0]
+                      //frequency[1][1] = frequency of first document, word in dict[1]
+                      //frequency[2][1] = frequency of second document, word in dict[1]
 
 
 //create for number of docs: frequency = new double *[numDocs];
@@ -20,7 +25,7 @@ void loadDict();
 bool isThere(string word);
 
 void search();
-double computeDocRank(int doc);
+double computeDocRank(int docNum);
 
 void inputQuery();
 
@@ -103,17 +108,34 @@ bool isThere(string word){
       return true;
     }
   }
+  return false;
 
 }
 
+
+// double **frequency;   //frequency[0] = query frequencies
+//                       //frequency[1][0] = frequency of first document, word in dict[0]
+//                       //frequency[1][1] = frequency of first document, word in dict[1]
+//                       //frequency[2][1] = frequency of second document, word in dict[1]
 
 
 
 void search(){
-  vector<double> docRanks;
-
+  struct RANK{
+    int doc;
+    int docRank;
+  }
+  vector<RANK> docRanks;
+  for(int i=1;i<NUM_DOCS;i++){
+    
+  }
 }
 
-double computeDocRank(int doc){
-
+double computeDocRank(int docNum){
+  double rank=0;
+  for (int i = 0;i<dict.size();i++){
+    rank+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
+  }
+  rank = sqrt(rank);
+  return rank;
 }
