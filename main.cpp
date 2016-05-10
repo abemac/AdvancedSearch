@@ -1,10 +1,15 @@
 #include "project2/stem.cpp"
 #include "project1/graphMain.cpp"
 #include "project1/Graph.h"
+<<<<<<< HEAD
 #include <vector>
+=======
+#include <ifstream>
+
+>>>>>>> f300ed461c2d68d79f00ef5934e75ea7619ac2fc
 using namespace std;
 void readFiles();
-int wordCount();
+void wordCount(vector<doubles> g);
 vector<string> dict;
 //double frequency[];
 //int * docNum[];
@@ -12,14 +17,18 @@ void inputQuery();
 void loadDict();
 bool isThere(string word);
 
+void search();
 
-
+void inputQuery();
 int main(){
   graphMain();
   //inputQuery();
   stem();
+<<<<<<< HEAD
   loadDict();
   return 0;
+=======
+>>>>>>> f300ed461c2d68d79f00ef5934e75ea7619ac2fc
 }
 
 void inputQuery(){
@@ -31,6 +40,39 @@ void inputQuery(){
   file.open("../texts/txt41.txt");
   file<<q;
   file.close();
+}
+
+
+void  wordCount(){
+  int total;
+  string path;
+  string line;
+  string length;
+  count=1;
+  while(count < 42){
+
+    if(fileNum<10){
+      path="../corpus/txt0"+count+"_cleaned.txt";
+    }
+    else{
+      path="../corpus/txt"+count+"_cleaned.txt";
+    }
+
+    ifstream myFile(path);
+    if( myFile.is_open()){
+      length=line.size();
+      int i =0;
+      while(i < length){
+
+      }
+    }
+    else{
+      cout<<"NOT FOUND"<<endl;
+    }
+
+    counts[i-1]=total;
+    count++;
+    total = 0;
 }
 
 void loadDict(){
@@ -89,4 +131,14 @@ bool isThere(string word){
       return true;
     }
   }
+
+}
+
+
+
+
+
+void search(){
+  vector<double> docRanks;
+
 }

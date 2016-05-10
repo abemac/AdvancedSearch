@@ -70,7 +70,7 @@ public:
 		starting from 'sp', prints out 'num' subtypes with distance from 'sp'
 		equal to 'order'.
 	*/
-	void citeSubtypes(string sp,int num,int order);
+	vector<string> citeSubtypes(string sp,int num,int order);
 
 	/*
 		returns the number of subspecies of 'sp' that are a distance away from 'sp'
