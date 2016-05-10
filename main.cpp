@@ -3,39 +3,20 @@
 #include "project1/Graph.h"
 using namespace std;
 void readFiles();
-<<<<<<< HEAD
 
 void wordCount(vector<double> g);
 vector<string> dict;
 
 
-//double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
-                      //frequency[0][1] = frequency of first document, word in dict[1]
-                      //frequency[1][1] = frequency of second document, word in dict[1]
-=======
-
-vector<string> dict;
-
-double **frequency;  //frequency[0][0] = frequency of first document, word in dict[0]
-                      //frequency[0][1] = frequency of first document, word in dict[1]
-                      //frequency[1][1] = frequency of second document, word in dict[1]
-
-
-//create for number of docs: frequency = new double *[numDocs];
-//add frequencies to document 1: frequencies[0]= new double[numberOfWords];
-
->>>>>>> 2e0cf9920d45384e7ba43def021f5d80049d07cc
 
 void inputQuery();
 void loadDict();
 bool isThere(string word);
 
 void search();
-double computeDocRank(int doc);
+void computeDocRank(int doc,int word);
 
 void inputQuery();
-
-
 int main(){
   //graphMain();
   //inputQuery();
@@ -61,10 +42,7 @@ void inputQuery(){
   file.close();
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 2e0cf9920d45384e7ba43def021f5d80049d07cc
 void loadDict(){
   for(int i=1; i<40; i++){
     string path;
@@ -130,19 +108,12 @@ bool isThere(string word){
 
 
 
-<<<<<<< HEAD
 
 // double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
 //                       //frequency[0][1] = frequency of first document, word in dict[1]
 //                       //frequency[1][1] = frequency of second document, word in dict[1]
-=======
->>>>>>> 2e0cf9920d45384e7ba43def021f5d80049d07cc
 
 void search(){
   vector<double> docRanks;
-
-}
-
-double computeDocRank(int doc){
 
 }
