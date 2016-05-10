@@ -9,13 +9,11 @@ vector<string> dict;
 vector<string>query;
 int getIndex(string word);
 vector<string> splitString(vector<string> dirty);
-<<<<<<< HEAD
 vector<string> lastDoc;
 int lastDocNum=-1;
 
-=======
 vector<string> addingSubtypes(vector<string> query);
->>>>>>> 0401eeb024761eddb2548779926f6e7a1814a64b
+
 int NUM_DOCS=40;
 
 double **frequency;   //frequency[0] = query frequencies
