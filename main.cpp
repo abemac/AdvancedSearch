@@ -62,7 +62,7 @@ int main(){
     cout<<"freqency of "<<dict[k]<<" is: "<<frequency[2][k]<<endl;
   }
 
-
+  search();
 
   return 0;
 
@@ -280,27 +280,27 @@ vector<string> splitString(vector<string> dirty){
   return clean;
 }
 
-vector<string> addingSubtypes(vector<string> query){
-  vector<string> additions;
-  vector<string> temp;
-
-  for(int i =0; i< query.size();i++){
-      temp= citeSubtypes(query[i],3,1);
-      for(int j=0;j<temp.size();j++){
-        if(additions.size() < 3){
-          additions.push_back(temp[j]);
-        }
-        if(additions.size() == 3){
-          break;
-        }
-      }
-
-      if(additions.size() == 3){
-        break;
-      }
-  }
-
-   vector<string> clean = splitString(additions);
-  for(int k =0; k < clean.size(); k++){
-    query.push_back(clean[k]);
-  }
+// vector<string> addingSubtypes(vector<string> query){
+//   vector<string> additions;
+//   vector<string> temp;
+//
+//   for(unsigned int i =0; i< query.size();i++){
+//       temp= graph.citeSubtypes(query[i],3,1);
+//       for(int j=0;j<temp.size();j++){
+//         if(additions.size() < 3){
+//           additions.push_back(temp[j]);
+//         }
+//         if(additions.size() == 3){
+//           break;
+//         }
+//       }
+//
+//       if(additions.size() == 3){
+//         break;
+//       }
+//   }
+//
+//    vector<string> clean = splitString(additions);
+//   for(int k =0; k < clean.size(); k++){
+//     query.push_back(clean[k]);
+//   }
