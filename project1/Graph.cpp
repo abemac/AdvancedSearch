@@ -90,7 +90,7 @@ vector<string> Graph::citeSubtypes(string sp,int num,int order){
 			  n->distanceFromSource=tmp->distanceFromSource+1;//sets the distance from 'sp'
 			  if(n->distanceFromSource==order && numPrinted<num){ //prints this vertice if applicable
 				  cout<<n->getName()<<" (order: "<<n->distanceFromSource<<")"<<endl;
-          sub.push_back(n->getName);
+          sub.push_back(n->getName());
 				  numPrinted++;
           if(numPrinted >= num){
             stop=true;

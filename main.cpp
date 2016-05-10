@@ -3,11 +3,18 @@
 #include "project1/Graph.h"
 using namespace std;
 void readFiles();
+<<<<<<< HEAD
+void wordCount(vector<double> g);
+vector<string> dict;
+
+//double frequency[][]; //frequency[0][0] = frequency of first document, word in dict[0]
+=======
 vector<string> dict;
 
 double **frequency;  //frequency[0][0] = frequency of first document, word in dict[0]
                       //frequency[0][1] = frequency of first document, word in dict[1]
                       //frequency[1][1] = frequency of second document, word in dict[1]
+>>>>>>> 7e48045c3da61f3bd6b37f59a0cdd0530553dfd7
 
 //create for number of docs: frequency = new double *[numDocs];
 //add frequencies to document 1: frequencies[0]= new double[numberOfWords];
@@ -28,6 +35,7 @@ int main(){
   stem();
 
   loadDict();
+  cout<<dict.size()<<endl;
   return 0;
 
 }
@@ -43,8 +51,11 @@ void inputQuery(){
   file.close();
 }
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 7e48045c3da61f3bd6b37f59a0cdd0530553dfd7
 void loadDict(){
   for(int i=0; i<40; i++){
     string path;
