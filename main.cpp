@@ -8,7 +8,6 @@ using namespace std;
 void readFiles();
 vector<string> dict;
 vector<string>query;
-vector<string> queryUnproccessed;
 int getIndex(string word);
 vector<string> splitString(vector<string> dirty);
 vector<string> lastDoc;
@@ -72,6 +71,7 @@ return 0;
 }
 
 void inputQuery(){
+  query.clear();
   char input[100];
   cout<<"Input Query String: ";
   cin.getline(input,sizeof(input));
@@ -313,8 +313,8 @@ void addSubtypes(){
   vector<string> additions;
   vector<string> temp;
 
-  for(unsigned int i =0; i< queryUnproccessed.size();i++){
-      temp= graph.citeSubtypes(queryUnproccessed[i],3,1);
+  for(unsigned int i =0; i< query.size();i++){
+      temp= graph.citeSubtypes(query[i],3,1);
       for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           additions.push_back(temp[j]);
@@ -332,7 +332,6 @@ void addSubtypes(){
   vector<string> clean = splitString(additions);
   for(unsigned int k =0; k < clean.size(); k++){
     query.push_back(clean[k]);
-    queryUnproccessed.push_back(clean[k]);
   }
   processQuery(query);
   for(unsigned int j=0; j<dict.size();j++){
@@ -366,6 +365,7 @@ void runCmdLineProgram(){
   }
   usrInput.push_back(input);
 	while(usrInput[0].compare("q")!=0 && usrInput[0].compare("quit")!=0){
+    RECURS=0;
 		if(usrInput[0].compare("help")==0 || usrInput[0].compare("h")==0){
 			printInstructions();
 			cout<<"Please Enter:";
