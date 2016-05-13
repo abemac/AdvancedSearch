@@ -61,7 +61,7 @@ int main(){
 
   int x = 1;
   while(x != 0){
-  cout<<"Do You Want to Stop Searching Type in 0"<<end;
+  cout<<"Do You Want to Stop Searching Type in 0, Also Only int"<<end;
   cin>>x;
   if(x == 0){
     break;
