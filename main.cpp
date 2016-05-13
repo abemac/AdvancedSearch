@@ -75,10 +75,6 @@ void inputQuery(){
   tmp.push_back(input);
   query = splitString(tmp);
   query = processQuery(query);
-
-  for(string s: query){
-    cout<<s<<endl;
-  }
 }
 double getQueryFrequency(string word){
   int count=0;
