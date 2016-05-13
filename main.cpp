@@ -62,6 +62,12 @@ int main(){
     }
   }
   runCmdLineProgram();
+  // inputQuery();
+  // for(unsigned int j=0; j<dict.size();j++){
+  //   frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
+  // }
+  // search();
+
 return 0;
 }
 
@@ -346,30 +352,56 @@ void printInstructions(){
  * Ask user's input to go through instructions.
  */
 void runCmdLineProgram(){
-	cout<<"\n**Welcome to Abraham, Tyler and Qichao's Advanced Search Program**\n"<<endl;
+
+  cout<<"\n**Welcome to Abraham, Tyler and Qichao's Advanced Search Program**\n"<<endl;
 	printInstructions();
-	string usrInput;
-	cout<<"Please Enter (h for help):";
-	cin>>usrInput;
-	while(usrInput.compare("q")!=0 && usrInput.compare("quit")!=0){
-		if(usrInput.compare("help")==0 || usrInput.compare("h")==0){
+	vector<string> usrInput;
+  char input[100];
+  cout<<"Please Enter (h for help):";
+  cin.getline(input,sizeof(input));
+
+  for(unsigned int i=0;i<100;i++){
+    if(input[i]<91 && input[i]>64)//convert string to all lower case
+      input[i]+=32;
+  }
+  usrInput.push_back(input);
+	while(usrInput[0].compare("q")!=0 && usrInput[0].compare("quit")!=0){
+		if(usrInput[0].compare("help")==0 || usrInput[0].compare("h")==0){
 			printInstructions();
 			cout<<"Please Enter:";
-			cin>>usrInput;
+      usrInput.pop_back();
+			cin.getline(input,sizeof(input));
+      for(unsigned int i=0;i<100;i++){
+        if(input[i]<91 && input[i]>64)//convert string to all lower case
+          input[i]+=32;
+      }
+      usrInput.push_back(input);
 		}
-		else if(usrInput.compare("search")==0 || usrInput.compare("1")==0){
+		else if(usrInput[0].compare("search")==0 || usrInput[0].compare("1")==0){
 			inputQuery();
       for(unsigned int j=0; j<dict.size();j++){
         frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
       }
       search();
 			cout<<"Please Enter (h for help):";
-			cin>>usrInput;
+      usrInput.pop_back();
+      cin.getline(input,sizeof(input));
+      for(unsigned int i=0;i<100;i++){
+        if(input[i]<91 && input[i]>64)//convert string to all lower case
+          input[i]+=32;
+      }
+      usrInput.push_back(input);
 		}
 		else{
 			cout<<"\n**Invalid Input, try again."<<endl;
 			cout<<"Please Enter (h for help):";
-			cin>>usrInput;
+      usrInput.pop_back();
+      cin.getline(input,sizeof(input));
+      for(unsigned int i=0;i<100;i++){
+        if(input[i]<91 && input[i]>64)//convert string to all lower case
+          input[i]+=32;
+      }
+      usrInput.push_back(input);
 		}
 	}//end while
 	cout<<"Bye Bye"<<endl;
