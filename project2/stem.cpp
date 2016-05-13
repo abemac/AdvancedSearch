@@ -852,39 +852,39 @@ bool isVowel(string check, int index){
 /*
  * print Instructions
  */
-void printInstructions(){
- 	cout<<"Instructions:"<<endl;
- 	cout<<"\t help (h) :  \t\t     show these instructions again\n"<<endl;
- 	cout<<"\t cleanUpFiles(clean or \"1\"): clean up stopWords and stem,\n\t\t\t\t     then rewrite to a new file into\n\t\t\t\t     corpus folder"<<endl;
- 	cout<<"\n\t quit (q): \t\t     quit program"<<endl;
-}
-/*
- * Welcome screen
- * Ask user's input to go through instructions.
- */
-void runCmdLineProgram(){
-	cout<<"\n**Welcome to Abraham, Tyler and Qichao's String Process Program**\n"<<endl;
-	printInstructions();
-	string usrInput;
-	cout<<"Please Enter (h for help):";
-	cin>>usrInput;
-	while(usrInput.compare("q")!=0 && usrInput.compare("quit")!=0){
-		if(usrInput.compare("help")==0 || usrInput.compare("h")==0){
-			printInstructions();
-			cout<<"Please Enter:";
-			cin>>usrInput;
-		}
-		else if(usrInput.compare("clean")==0 || usrInput.compare("1")==0|| usrInput.compare("cleanUpFiles")==0){
-			processDirectory();
-			cout<<"Done"<<endl;
-			cout<<"Please Enter (h for help):";
-			cin>>usrInput;
-		}
-		else{
-			cout<<"\n**Invalid Input, try again."<<endl;
-			cout<<"Please Enter (h for help):";
-			cin>>usrInput;
-		}
-	}//end while
-	cout<<"Bye Bye"<<endl;
-}
+// void printInstructions(){
+//  	cout<<"Instructions:"<<endl;
+//  	cout<<"\t help (h) :  \t\t     show these instructions again\n"<<endl;
+//  	cout<<"\t cleanUpFiles(clean or \"1\"): clean up stopWords and stem,\n\t\t\t\t     then rewrite to a new file into\n\t\t\t\t     corpus folder"<<endl;
+//  	cout<<"\n\t quit (q): \t\t     quit program"<<endl;
+// }
+// /*
+//  * Welcome screen
+//  * Ask user's input to go through instructions.
+//  */
+// void runCmdLineProgram(){
+// 	cout<<"\n**Welcome to Abraham, Tyler and Qichao's String Process Program**\n"<<endl;
+// 	printInstructions();
+// 	string usrInput;
+// 	cout<<"Please Enter (h for help):";
+// 	cin>>usrInput;
+// 	while(usrInput.compare("q")!=0 && usrInput.compare("quit")!=0){
+// 		if(usrInput.compare("help")==0 || usrInput.compare("h")==0){
+// 			printInstructions();
+// 			cout<<"Please Enter:";
+// 			cin>>usrInput;
+// 		}
+// 		else if(usrInput.compare("clean")==0 || usrInput.compare("1")==0|| usrInput.compare("cleanUpFiles")==0){
+// 			processDirectory();
+// 			cout<<"Done"<<endl;
+// 			cout<<"Please Enter (h for help):";
+// 			cin>>usrInput;
+// 		}
+// 		else{
+// 			cout<<"\n**Invalid Input, try again."<<endl;
+// 			cout<<"Please Enter (h for help):";
+// 			cin>>usrInput;
+// 		}
+// 	}//end while
+// 	cout<<"Bye Bye"<<endl;
+// }

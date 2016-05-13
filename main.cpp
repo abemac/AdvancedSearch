@@ -17,6 +17,9 @@ const int MAX_RECUR_LIMIT = 3;
 int RECURS=0;
 double T = .6;
 vector<string> addingSubtypes(vector<string> query);
+void runCmdLineProgram();
+void printInstructions();
+
 
 int NUM_DOCS=40;
 
@@ -58,31 +61,7 @@ int main(){
       frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
     }
   }
-
-  int x = 1;
-  while(x != 0){
-  cout<<"Do You Want to Stop Searching Type in 0, Also Only int"<<end;
-  cin>>x;
-  if(x == 0){
-    break;
-  }
-
-  inputQuery();
-
-
-  for(unsigned int j=0; j<dict.size();j++){
-    frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
-  }
-  // for(unsigned int k=0;k<dict.size();k++){
-  //   cout<<"freqency of "<<dict[k]<<" is: "<<frequency[2][k]<<endl;
-  // }
-
-  search();
-  // for(string s :query){
-  //   cout<<s<<endl;
-  // }
-
-}
+  runCmdLineProgram();
 return 0;
 }
 
@@ -354,4 +333,44 @@ void addSubtypes(){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
 
+}
+
+void printInstructions(){
+ 	cout<<"Instructions:"<<endl;
+ 	cout<<"\t help (h) :  \t\t     show these instructions again\n"<<endl;
+ 	cout<<"\t Start Search(search or \"1\"): start input query,\n\t\t\t\t"<<endl;
+ 	cout<<"\n\t quit (q): \t\t     quit program"<<endl;
+}
+/*
+ * Welcome screen
+ * Ask user's input to go through instructions.
+ */
+void runCmdLineProgram(){
+	cout<<"\n**Welcome to Abraham, Tyler and Qichao's Advanced Search Program**\n"<<endl;
+	printInstructions();
+	string usrInput;
+	cout<<"Please Enter (h for help):";
+	cin>>usrInput;
+	while(usrInput.compare("q")!=0 && usrInput.compare("quit")!=0){
+		if(usrInput.compare("help")==0 || usrInput.compare("h")==0){
+			printInstructions();
+			cout<<"Please Enter:";
+			cin>>usrInput;
+		}
+		else if(usrInput.compare("search")==0 || usrInput.compare("1")==0){
+			inputQuery();
+      for(unsigned int j=0; j<dict.size();j++){
+        frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
+      }
+      search();
+			cout<<"Please Enter (h for help):";
+			cin>>usrInput;
+		}
+		else{
+			cout<<"\n**Invalid Input, try again."<<endl;
+			cout<<"Please Enter (h for help):";
+			cin>>usrInput;
+		}
+	}//end while
+	cout<<"Bye Bye"<<endl;
 }
