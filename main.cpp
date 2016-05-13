@@ -82,9 +82,6 @@ void inputQuery(){
   vector<string> tmp;
   tmp.push_back(input);
   query = splitString(tmp);
-  for(string s: query){
-    queryUnproccessed.push_back(s);
-  }
   query = processQuery(query);
 }
 double getQueryFrequency(string word){
@@ -255,15 +252,7 @@ vector<RANK> search(){
 
   if(docRanks[0].distance > T && RECURS< MAX_RECUR_LIMIT){
     RECURS++;
-    cout<<"\nold:"<<endl;
-    for(string k : queryUnproccessed){
-      cout<<k<<endl;
-    }
     addSubtypes();
-    cout<<"\nNew"<<endl;
-    for(string k : queryUnproccessed){
-      cout<<k<<endl;
-    }
     docRanks=search();
 
   }else{
