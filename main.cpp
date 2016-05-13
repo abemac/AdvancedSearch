@@ -60,7 +60,7 @@ int main(){
   }
 
   int x = 1;
-  while(x != 0){}
+  while(x != 0){
   cout<<"Do You Want to Stop Searching Type in 0"<<end;
   cin>>x;
   if(x == 0){
