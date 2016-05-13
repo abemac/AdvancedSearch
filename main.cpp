@@ -46,7 +46,6 @@ void inputQuery();
 
 int main(){
   graphMain();
-  inputQuery();
   stem();
   loadDict();
 
@@ -59,6 +58,18 @@ int main(){
       frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
     }
   }
+
+  int x = 1;
+  while(x != 0){}
+  cout<<"Do You Want to Stop Searching Type in 0"<<end;
+  cin>>x;
+  if(x == 0){
+    break;
+  }
+
+  inputQuery();
+
+
   for(unsigned int j=0; j<dict.size();j++){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
@@ -66,14 +77,13 @@ int main(){
   //   cout<<"freqency of "<<dict[k]<<" is: "<<frequency[2][k]<<endl;
   // }
 
-
   search();
   // for(string s :query){
   //   cout<<s<<endl;
   // }
 
-  return 0;
-
+}
+return 0;
 }
 
 void inputQuery(){
