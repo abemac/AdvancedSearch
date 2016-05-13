@@ -3,15 +3,19 @@
 #include "project1/Graph.h"
 #include <cmath>
 #include <algorithm>
+
 using namespace std;
 void readFiles();
 vector<string> dict;
 vector<string>query;
+vector<string> queryUnproccessed;
 int getIndex(string word);
 vector<string> splitString(vector<string> dirty);
 vector<string> lastDoc;
 int lastDocNum=-1;
-
+const int MAX_RECUR_LIMIT = 3;
+int RECURS=0;
+double T = .6;
 vector<string> addingSubtypes(vector<string> query);
 
 int NUM_DOCS=40;
@@ -27,14 +31,15 @@ bool isThere(string word);
 double getFrequency(int i, string word);
 double getQueryFrequency(string word);
 int wordCounts[41];
-
-void search();
-double computeDocDistance(int docNum);
+void addSubtypes();
 struct RANK{
   int doc;
   double distance;
 
 };
+vector<RANK> search();
+double computeDocDistance(int docNum);
+
 bool RANKcompare(RANK lhs, RANK rhs);
 void inputQuery();
 
@@ -63,6 +68,9 @@ int main(){
 
 
   search();
+  // for(string s :query){
+  //   cout<<s<<endl;
+  // }
 
   return 0;
 
@@ -72,9 +80,16 @@ void inputQuery(){
   char input[100];
   cout<<"Input Query String: ";
   cin.getline(input,sizeof(input));
+  for(unsigned int i=0;i<100;i++){
+    if(input[i]<91 && input[i]>64)//convert string to all lower case
+      input[i]+=32;
+  }
   vector<string> tmp;
   tmp.push_back(input);
   query = splitString(tmp);
+  for(string s: query){
+    queryUnproccessed.push_back(s);
+  }
   query = processQuery(query);
 }
 double getQueryFrequency(string word){
@@ -232,7 +247,7 @@ double getFrequency(int i, string word){
 
 bool RANKcompare(const RANK lhs, const RANK rhs) { return lhs.distance < rhs.distance; }
 
-void search(){
+vector<RANK> search(){
   vector<RANK> docRanks;
   for(int i=1;i<41;i++){
     RANK tmp;
@@ -243,13 +258,32 @@ void search(){
   sort(docRanks.begin(),docRanks.end(),RANKcompare);
   //check if below Threshold T
 
-  cout<<"Document Ranking:"<<endl;
-  cout<<docRanks[0].doc<<": "<<docRanks[0].distance<<endl;
-  cout<<docRanks[1].doc<<": "<<docRanks[1].distance<<endl;
-  cout<<docRanks[2].doc<<": "<<docRanks[2].distance<<endl;
-  cout<<docRanks[3].doc<<": "<<docRanks[3].distance<<endl;
-  cout<<docRanks[4].doc<<": "<<docRanks[4].distance<<endl;
-  cout<<docRanks[5].doc<<": "<<docRanks[5].distance<<endl;
+  if(docRanks[0].distance > T && RECURS< MAX_RECUR_LIMIT){
+    RECURS++;
+    cout<<"\nold:"<<endl;
+    for(string k : queryUnproccessed){
+      cout<<k<<endl;
+    }
+    addSubtypes();
+    cout<<"\nNew"<<endl;
+    for(string k : queryUnproccessed){
+      cout<<k<<endl;
+    }
+    docRanks=search();
+
+  }
+
+
+
+    cout<<"Document Ranking:"<<endl;
+    cout<<docRanks[0].doc<<": "<<docRanks[0].distance<<endl;
+    cout<<docRanks[1].doc<<": "<<docRanks[1].distance<<endl;
+    cout<<docRanks[2].doc<<": "<<docRanks[2].distance<<endl;
+    cout<<docRanks[3].doc<<": "<<docRanks[3].distance<<endl;
+    cout<<docRanks[4].doc<<": "<<docRanks[4].distance<<endl;
+    cout<<docRanks[5].doc<<": "<<docRanks[5].distance<<endl;
+
+  return docRanks;
 
 }
 
@@ -283,12 +317,12 @@ vector<string> splitString(vector<string> dirty){
   return clean;
 }
 
-vector<string> addingSubtypes(vector<string> query){
+void addSubtypes(){
   vector<string> additions;
   vector<string> temp;
 
-  for(unsigned int i =0; i< query.size();i++){
-      temp= graph.citeSubtypes(query[i],3,1);
+  for(unsigned int i =0; i< queryUnproccessed.size();i++){
+      temp= graph.citeSubtypes(queryUnproccessed[i],3,1);
       for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           additions.push_back(temp[j]);
@@ -303,9 +337,10 @@ vector<string> addingSubtypes(vector<string> query){
       }
   }
 
-   vector<string> clean = splitString(additions);
+  vector<string> clean = splitString(additions);
   for(unsigned int k =0; k < clean.size(); k++){
     query.push_back(clean[k]);
+    queryUnproccessed.push_back(clean[k]);
   }
-  return processQuery(query);
+  processQuery(query);
 }

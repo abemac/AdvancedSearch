@@ -76,7 +76,7 @@ vector<string> Graph::citeSubtypes(string sp,int num,int order){
   queue.back()->distanceFromSource=0;//'sp' is 0 away from itself
   int numPrinted=0;// to keep track of the number of subtypes found
   if(order==0){
-	  cout<<"\t0 subspecies have found at order 0"<<endl;
+	  //cout<<"\t0 subspecies have found at order 0"<<endl;
   }
   else{
     bool stop=false;
@@ -89,7 +89,7 @@ vector<string> Graph::citeSubtypes(string sp,int num,int order){
 				  queue.push_front(n);
 			  n->distanceFromSource=tmp->distanceFromSource+1;//sets the distance from 'sp'
 			  if(n->distanceFromSource==order && numPrinted<num){ //prints this vertice if applicable
-				  cout<<n->getName()<<" (order: "<<n->distanceFromSource<<")"<<endl;
+				  //cout<<n->getName()<<" (order: "<<n->distanceFromSource<<")"<<endl;
           sub.push_back(n->getName());
 				  numPrinted++;
           if(numPrinted >= num){

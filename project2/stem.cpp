@@ -676,9 +676,13 @@ void processDirectory(){
 
 vector<string> processQuery(vector<string> query){
 		currentFile.clear();
+		stopWords.clear();
+		stopWordsHash.makeEmpty();
+		init();
 		for (string s: query){
 			currentFile.push_back(s);
 		}
+		//stopWordsHash.printHashTable();
 		rmStopWords();
 		stemPorterAlg();
 		return currentFile;
