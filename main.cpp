@@ -271,10 +271,7 @@ vector<RANK> search(){
     }
     docRanks=search();
 
-  }
-
-
-
+  }else{
     cout<<"Document Ranking:"<<endl;
     cout<<docRanks[0].doc<<": "<<docRanks[0].distance<<endl;
     cout<<docRanks[1].doc<<": "<<docRanks[1].distance<<endl;
@@ -282,7 +279,7 @@ vector<RANK> search(){
     cout<<docRanks[3].doc<<": "<<docRanks[3].distance<<endl;
     cout<<docRanks[4].doc<<": "<<docRanks[4].distance<<endl;
     cout<<docRanks[5].doc<<": "<<docRanks[5].distance<<endl;
-
+  }
   return docRanks;
 
 }
@@ -343,4 +340,8 @@ void addSubtypes(){
     queryUnproccessed.push_back(clean[k]);
   }
   processQuery(query);
+  for(unsigned int j=0; j<dict.size();j++){
+    frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
+  }
+
 }
