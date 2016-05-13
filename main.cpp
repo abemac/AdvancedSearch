@@ -44,6 +44,7 @@ int main(){
   inputQuery();
   stem();
   loadDict();
+
   frequency =new double*[41];
   for(unsigned int j=0;j<41;j++){
     frequency[j]=new double[dict.size()];
@@ -57,7 +58,7 @@ int main(){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
   // for(unsigned int k=0;k<dict.size();k++){
-  //   cout<<"freqency of "<<dict[k]<<" is: "<<frequency[0][k]<<endl;
+  //   cout<<"freqency of "<<dict[k]<<" is: "<<frequency[2][k]<<endl;
   // }
 
 
@@ -243,12 +244,12 @@ void search(){
   //check if below Threshold T
 
   cout<<"Document Ranking:"<<endl;
+  cout<<docRanks[0].doc<<": "<<docRanks[0].distance<<endl;
   cout<<docRanks[1].doc<<": "<<docRanks[1].distance<<endl;
   cout<<docRanks[2].doc<<": "<<docRanks[2].distance<<endl;
   cout<<docRanks[3].doc<<": "<<docRanks[3].distance<<endl;
   cout<<docRanks[4].doc<<": "<<docRanks[4].distance<<endl;
   cout<<docRanks[5].doc<<": "<<docRanks[5].distance<<endl;
-  cout<<docRanks[6].doc<<": "<<docRanks[6].distance<<endl;
 
 }
 
