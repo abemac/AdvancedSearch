@@ -5,44 +5,42 @@
 #include <algorithm>
 
 using namespace std;
-void readFiles();
+
 vector<string> dict;
 vector<string>query;
-int getIndex(string word);
-vector<string> splitString(vector<string> dirty);
 vector<string> lastDoc;
 int lastDocNum=-1;
 const int MAX_RECUR_LIMIT = 3;
 int RECURS=0;
 double T = .6;
-void runCmdLineProgram();
-void printInstructions();
-
-
 int NUM_DOCS=40;
-
 double **frequency;   //frequency[0] = query frequencies
 //                       //frequency[1][0] = frequency of first document, word in dict[0]
 //                       //frequency[1][1] = frequency of first document, word in dict[1]
 //                       //frequency[2][1] = frequency of second document, word in dict[1]
-
-void inputQuery();
-void loadDict();
-bool isThere(string word);
-double getFrequency(int i, string word);
-double getQueryFrequency(string word);
 int wordCounts[41];
-void addSubtypes();
 struct RANK{
   int doc;
   double distance;
 
 };
+void readFiles();
+int getIndex(string word);
+vector<string> splitString(vector<string> dirty);
+void runCmdLineProgram();
+void printInstructions();
+void inputQuery();
+void loadDict();
+bool isThere(string word);
+double getFrequency(int i, string word);
+double getQueryFrequency(string word);
+void addSubtypes();
 vector<RANK> search();
 double computeDocDistance(int docNum);
-
 bool RANKcompare(RANK lhs, RANK rhs);
 void inputQuery();
+
+
 
 
 int main(){
