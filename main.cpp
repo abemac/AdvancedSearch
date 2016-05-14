@@ -57,7 +57,11 @@ int main(){
   }
   for (unsigned int i=1; i<41; i++){
     for(unsigned int j=0; j<dict.size();j++){
-      frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
+      if(wordCounts[i]!=0){
+        frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
+      }else{
+        frequency[i][j]=infinity;
+      }
     }
   }
 
@@ -299,17 +303,24 @@ vector<string> splitString(vector<string> dirty){	//split query to single words 
 void addSubtypes(){		//find and add subtypes of query
   vector<string> additions;
   vector<string> temp;
+  vector<string> toCheck;
+  for (string s : query){
+    toCheck.push_back(s);
+  }
+  for(string s : unproccesedQuery){
+    toCheck.push_back(s);
+  }
 
-  for(unsigned int i =0; i< query.size();i++){
-      if(graph.containsVertice(query[i])){	//check if the query is in graph
-        temp= graph.citeSubtypes(query[i],3,1);	//get 3 oder-1 subtypes of the query
+  for(unsigned int i =0; i< toCheck.size();i++){
+      if(graph.containsVertice(toCheck[i])){	//check if the query is in graph
+        temp= graph.citeSubtypes(toCheck[i],3,1);	//get 3 oder-1 subtypes of the query
       }else{
         temp.clear();
       }
       for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           bool inAlready=false;
-          for(string s: query){
+          for(string s: toCheck){
             if(s.compare(temp[j])==0){
               inAlready=true;
             }else {
@@ -351,6 +362,7 @@ void addSubtypes(){		//find and add subtypes of query
   }
   for(unsigned int k =0; k < clean.size(); k++){
     query.push_back(clean[k]);
+    unproccesedQuery.push_back(clean[k]);
     cout<<clean[k]<<" ";
   }
   if(clean.size()>0){
