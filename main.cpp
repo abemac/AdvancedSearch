@@ -15,7 +15,6 @@ int lastDocNum=-1;
 const int MAX_RECUR_LIMIT = 3;
 int RECURS=0;
 double T = .6;
-vector<string> addingSubtypes(vector<string> query);
 void runCmdLineProgram();
 void printInstructions();
 
@@ -303,7 +302,11 @@ void addSubtypes(){
   vector<string> temp;
 
   for(unsigned int i =0; i< query.size();i++){
-      temp= graph.citeSubtypes(query[i],3,1);
+      if(graph.existsInGraph(query[i]){
+        temp= graph.citeSubtypes(query[i],3,1);
+      }else{
+        temp.clear();
+      }
       for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           additions.push_back(temp[j]);

@@ -297,3 +297,13 @@ Node* Graph::findVertice(string name){
 vector<Node*>* Graph::getVertices(){
 	return &vertices;
 }
+
+
+bool Graph::existsInGraph(string node){
+  for( string s:vertices){
+    if(s.compare(node)==0){
+      return true;
+    }
+  }
+  return false;
+}
