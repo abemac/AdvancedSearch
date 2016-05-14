@@ -6,9 +6,9 @@
 
 using namespace std;
 
-vector<string> dict;
-vector<string>query;
-vector<string> lastDoc;
+vector<string> dict;	//vector for dictionary
+vector<string>query;	//vector for query
+vector<string> lastDoc;	//temp vector for last read file
 int lastDocNum=-1;
 const int MAX_RECUR_LIMIT = 3;
 int RECURS=0;
@@ -20,7 +20,7 @@ double **frequency;   //frequency[0] = query frequencies
 //                       //frequency[1][1] = frequency of first document, word in dict[1]
 //                       //frequency[2][1] = frequency of second document, word in dict[1]
 int wordCounts[41];
-struct RANK{
+struct RANK{	//struct for ranking
   int doc;
   double distance;
 
@@ -30,16 +30,16 @@ int getIndex(string word);	//return index of the word that is in dict(vector).
 vector<string> splitString(vector<string> dirty);
 void runCmdLineProgram();	//run command line interface
 void printInstructions();	//print out instructions after user input "h"
-void inputQuery();		
+void inputQuery();		//ask user for query and process query and store to query vector
 void loadDict();		//read all files and build a dictionary to store all the unique words
 bool isThere(string word);	//check the word is in the dictionary
 bool queryExists();		//check all inputs are in dictionary
 double getFrequency(int i, string word);	//get frequency of the word in the file which index is i
 double getQueryFrequency(string word);		//get frequency of the word in input
-void addSubtypes();		
-vector<RANK> search();
-double computeDocDistance(int docNum);
-bool RANKcompare(RANK lhs, RANK rhs);
+void addSubtypes();		//find subtype of query
+vector<RANK> search();		//vector to store RANK
+double computeDocDistance(int docNum);	//compute dictance for the doc which index is docNum
+bool RANKcompare(RANK lhs, RANK rhs);	//compare RANK
 void inputQuery();		//ask user for input
 
 int main(){
@@ -115,7 +115,7 @@ void loadDict(){
     int wordCount=0;
     char c;
     fstream textfile;
-    textfile.open(path);
+    textfile.open(path);	//read file form path
     string word="";
   	while (!textfile.eof()){
   			c=textfile.get();//assign a char to c
@@ -202,7 +202,7 @@ int getFrequency(int i, string word){	//return frequency of the word in the file
   textfile.open(path);
   string x="";
   while (!textfile.eof()){	//read words from files
-      c=textfile.get();//assign a char to c
+      c=textfile.get();		//assign a char to c
       while(c==' '){
         c=textfile.get();
       }
@@ -294,8 +294,8 @@ vector<string> splitString(vector<string> dirty){
   return clean;
 }
 
-void addSubtypes(){
-  vector<string> additions;
+void addSubtypes(){		//find and add subtypes of query
+  vector<string> additions;	
   vector<string> temp;
 
   for(unsigned int i =0; i< query.size();i++){
@@ -333,7 +333,7 @@ void addSubtypes(){
 
 }
 
-bool queryExists(){
+bool queryExists(){		//return a boolean for if the word in query is in the dictionary
   for(string s: query){
     if(isThere(s)){
       return true;
