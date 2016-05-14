@@ -309,6 +309,7 @@ void addSubtypes(){
       for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           additions.push_back(temp[j]);
+
         }
         if(additions.size() == 3){
           break;
@@ -321,9 +322,12 @@ void addSubtypes(){
   }
 
   vector<string> clean = splitString(additions);
+  cout<<"Your query was appended with: ";
   for(unsigned int k =0; k < clean.size(); k++){
     query.push_back(clean[k]);
+    cout<<clean[k]<<" ";
   }
+  cout<<""<<endl;
   processQuery(query);
   for(unsigned int j=0; j<dict.size();j++){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
