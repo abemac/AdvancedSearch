@@ -6,16 +6,10 @@
 
 using namespace std;
 
-<<<<<<< HEAD
-vector<string> dict;
-vector<string>query;
-vector<string> unproccesedQuery;
-vector<string> lastDoc;
-=======
 vector<string> dict;	//vector for dictionary
 vector<string>query;	//vector for query
 vector<string> lastDoc;	//temp vector for last read file
->>>>>>> 96792e826044815d21ada89ef293d1d8368c49ef
+vector<string> unproccesedQuery;
 int lastDocNum=-1;
 const int MAX_RECUR_LIMIT = 3;
 int RECURS=0;
@@ -57,7 +51,7 @@ int main(){
 /*
  *	create a 2D array to store frequence for every word in each file.
  */
-  frequency =new double*[41];		
+  frequency =new double*[41];
   for(unsigned int j=0;j<41;j++){
     frequency[j]=new double[dict.size()];
   }
@@ -66,7 +60,7 @@ int main(){
       frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
     }
   }
-  
+
   runCmdLineProgram();	//run command line
 
 return 0;
@@ -83,14 +77,9 @@ void inputQuery(){
   }
   vector<string> tmp;
   tmp.push_back(input);
-<<<<<<< HEAD
-  query = splitString(tmp);
-  unproccesedQuery=query;
-  query = processQuery(query);
-=======
   query = splitString(tmp);	//split user input to single words
+  unproccesedQuery=query;
   query = processQuery(query);	//stem query
->>>>>>> 96792e826044815d21ada89ef293d1d8368c49ef
 }
 double getQueryFrequency(string word){	//get frequency of the word in query
   int count=0;
@@ -147,7 +136,7 @@ void loadDict(){
           wordCount++;
         if(!isThere(word) && word.size()!=0)
           dict.push_back(word);
-        
+
         word="";
   	}
     wordCounts[i]=wordCount;
@@ -179,7 +168,7 @@ int getIndex(string word){	//retrun the index of the word in dictionary
 
 
 
-int getFrequency(int i, string word){	//return frequency of the word in the file which index is i
+double getFrequency(int i, string word){	//return frequency of the word in the file which index is i
   if(lastDocNum==i){	//check if the file has been read
     int count=0;
     for(string s : lastDoc){	// check the word's frequence in temp vector
@@ -246,9 +235,9 @@ int getFrequency(int i, string word){	//return frequency of the word in the file
 
 bool RANKcompare(const RANK lhs, const RANK rhs) { return lhs.distance < rhs.distance; }	//compare distances of two RANKs
 
-vector<RANK> search(){	//return a sorted list of RANKs 
+vector<RANK> search(){	//return a sorted list of RANKs
   vector<RANK> docRanks;
-  for(int i=1;i<41;i++){	
+  for(int i=1;i<41;i++){
     RANK tmp;
     tmp.doc=i;
     tmp.distance=computeDocDistance(i);	//compute distance between query and the file,index of i
@@ -289,7 +278,7 @@ double computeDocDistance(int docNum){		//get distance between query and the fil
 
 
 
-vector<string> splitString(vector<string> dirty){	//split query to single words and return the vector of the processed query 
+vector<string> splitString(vector<string> dirty){	//split query to single words and return the vector of the processed query
   vector<string> clean;
   for(unsigned int i=0;i<dirty.size();i++){
     string line = dirty[i];
@@ -308,22 +297,16 @@ vector<string> splitString(vector<string> dirty){	//split query to single words 
 }
 
 void addSubtypes(){		//find and add subtypes of query
-  vector<string> additions;	
+  vector<string> additions;
   vector<string> temp;
 
   for(unsigned int i =0; i< query.size();i++){
-<<<<<<< HEAD
-      if(graph.containsVertice(query[i])){
-        temp= graph.citeSubtypes(query[i],3,1);
-=======
-      if(graph.existsInGraph(query[i])){	//check if the query is in graph
+      if(graph.containsVertice(query[i])){	//check if the query is in graph
         temp= graph.citeSubtypes(query[i],3,1);	//get 3 oder-1 subtypes of the query
->>>>>>> 96792e826044815d21ada89ef293d1d8368c49ef
       }else{
         temp.clear();
       }
       for(unsigned int j=0;j<temp.size();j++){
-<<<<<<< HEAD
         if(additions.size() < 3){
           bool inAlready=false;
           for(string s: query){
@@ -351,11 +334,6 @@ void addSubtypes(){		//find and add subtypes of query
           if(!inAlready){
             additions.push_back(temp[j]);
           }
-=======
-        if(additions.size() < 3){	//only read 3 subtypes
-          additions.push_back(temp[j]); 
-
->>>>>>> 96792e826044815d21ada89ef293d1d8368c49ef
         }
         if(additions.size() == 3){
           break;
@@ -368,7 +346,6 @@ void addSubtypes(){		//find and add subtypes of query
   }
 
   vector<string> clean = splitString(additions);
-<<<<<<< HEAD
   if(clean.size()>0){
     cout<<"\nYour query was appended with: ";
   }
@@ -380,15 +357,6 @@ void addSubtypes(){		//find and add subtypes of query
     cout<<""<<endl;
   }
   query=processQuery(query);
-=======
-  cout<<"Your query was appended with: ";
-  for(unsigned int k =0; k < clean.size(); k++){	//display added subtypes 
-    query.push_back(clean[k]);
-    cout<<clean[k]<<" ";
-  }
-  cout<<""<<endl;
-  processQuery(query);	//stem query
->>>>>>> 96792e826044815d21ada89ef293d1d8368c49ef
   for(unsigned int j=0; j<dict.size();j++){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }

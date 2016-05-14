@@ -275,18 +275,6 @@ bool Graph::containsVertice(string name){
         returnVal=true;
       }
     }
-    // if(returnVal==false){
-    //   for(Node *n : vertices){
-    //     if(stemString((n->getName())).compare(name)==0){//returns true if the names are equal
-    //       returnVal=true;
-    //     }else if (name.back()==':'){//removes colon from end if needed and re-compares
-    //       string name2 = name.substr(0,name.size()-1);
-    //       if(stemString((n->getName())).compare(name2)==0){
-    //         returnVal=true;
-    //       }
-    //     }
-    //   }
-    // }
   }
   return returnVal;
 }
