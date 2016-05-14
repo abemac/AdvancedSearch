@@ -40,14 +40,17 @@ void addSubtypes();
 vector<RANK> search();
 double computeDocDistance(int docNum);
 bool RANKcompare(RANK lhs, RANK rhs);
-void inputQuery();
+void inputQuery();		//ask user for input
 
 int main(){
-  graphMain();
-  stem();
-  loadDict();
+  graphMain();			//build graph of knowledge base
+  stem();			//stem all files
+  loadDict();			//load dictionary
 
-  frequency =new double*[41];
+/*
+ *	create a 2D array to store frequence for every word in each file.
+ */
+  frequency =new double*[41];		
   for(unsigned int j=0;j<41;j++){
     frequency[j]=new double[dict.size()];
   }
@@ -56,26 +59,27 @@ int main(){
       frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
     }
   }
-  runCmdLineProgram();
+  
+  runCmdLineProgram();	//run command line
 
 return 0;
 }
 
 void inputQuery(){
-  query.clear();
-  char input[100];
+  query.clear();	//clean up query
+  char input[100];	//a array to store user input
   cout<<"Input Query String: ";
-  cin.getline(input,sizeof(input));
+  cin.getline(input,sizeof(input));	//ask and read user input
   for(unsigned int i=0;i<100;i++){
     if(input[i]<91 && input[i]>64)//convert string to all lower case
       input[i]+=32;
   }
   vector<string> tmp;
   tmp.push_back(input);
-  query = splitString(tmp);
-  query = processQuery(query);
+  query = splitString(tmp);	//split user input to single words
+  query = processQuery(query);	//stem query
 }
-double getQueryFrequency(string word){
+double getQueryFrequency(string word){	//get frequency of the word in query
   int count=0;
   for(string s: query){
     if(s.compare(word)==0){
@@ -91,7 +95,7 @@ double getQueryFrequency(string word){
 void loadDict(){
   for(int i=1; i<41; i++){
     string path;
-    if(os.compare("Windows")==0){
+    if(os.compare("Windows")==0){	//determine file path for different OS
   		if(i<10){
   			path="..\\corpus\\txt0"+to_string(i)+"_cleaned.txt";
   		}
@@ -109,9 +113,9 @@ void loadDict(){
     }
 
     int wordCount=0;
-  	char c;
-  	fstream textfile;
-  	textfile.open(path);
+    char c;
+    fstream textfile;
+    textfile.open(path);
     string word="";
   	while (!textfile.eof()){
   			c=textfile.get();//assign a char to c
@@ -128,9 +132,9 @@ void loadDict(){
   			}
         if(word.size()!=0)
           wordCount++;
-        if(!isThere(word) && word.size()!=0){
+        if(!isThere(word) && word.size()!=0)
           dict.push_back(word);
-        }
+        
         word="";
   	}
     wordCounts[i]=wordCount;
@@ -141,7 +145,7 @@ void loadDict(){
   }
 }
 
-bool isThere(string word){
+bool isThere(string word){	//check if the word is in dictionary
   for(unsigned int i=0; i<dict.size(); i++){
     if(dict[i].compare(word)==0){
       return true;
@@ -150,7 +154,7 @@ bool isThere(string word){
   return false;
 
 }
-int getIndex(string word){
+int getIndex(string word){	//retrun the index of the word in dictionary
   for (unsigned int i=0; i<dict.size(); i++){
     if(dict[i].compare(word)==0){
       return i;
@@ -162,10 +166,10 @@ int getIndex(string word){
 
 
 
-double getFrequency(int i, string word){
-  if(lastDocNum==i){
-    double count=0;
-    for(string s : lastDoc){
+int getFrequency(int i, string word){	//return frequency of the word in the file which index is i
+  if(lastDocNum==i){	//check if the file has been read
+    int count=0;
+    for(string s : lastDoc){	// check the word's frequence in temp vector
       if(s.compare(word)==0){
         count++;
       }
@@ -173,10 +177,10 @@ double getFrequency(int i, string word){
     return count;
   }
 
-  lastDoc.clear();
+  lastDoc.clear();	//clear temp vector
 
   string path;
-  if(os.compare("Windows")==0){
+  if(os.compare("Windows")==0){	//determine file path for different OS
     if(i<10){
       path="..\\corpus\\txt0"+to_string(i)+"_cleaned.txt";
     }
@@ -197,19 +201,18 @@ double getFrequency(int i, string word){
   fstream textfile;
   textfile.open(path);
   string x="";
-  while (!textfile.eof()){
+  while (!textfile.eof()){	//read words from files
       c=textfile.get();//assign a char to c
       while(c==' '){
         c=textfile.get();
       }
-      //x.push_back("");//create a new space for new word
       while((c!=',' && c!=' ' && c!='\n') && !textfile.eof()){//split words by ',' ' ' '\n'
 
         if(c>=97&& c<=122)//only include letters
           x=x+c;//build words char by char
         c=textfile.get();
       }
-      lastDoc.push_back(x);
+      lastDoc.push_back(x);	//load words into temp vector
       if(x.compare(word)==0){
         count++;
       }
@@ -339,7 +342,7 @@ bool queryExists(){
   return false;
 }
 
-void printInstructions(){
+void printInstructions(){	// print out instructions
  	cout<<"Instructions:"<<endl;
  	cout<<"\t help (h) :  \t\t     show these instructions again\n"<<endl;
  	cout<<"\t Start Search(search or \"1\"): start input query,\n\t\t\t\t"<<endl;
@@ -352,8 +355,8 @@ void printInstructions(){
 void runCmdLineProgram(){
 
   cout<<"\n**Welcome to Abraham, Tyler and Qichao's Advanced Search Program**\n"<<endl;
-	printInstructions();
-	vector<string> usrInput;
+  printInstructions();
+  vector<string> usrInput;
   char input[100];
   cout<<"Please Enter (h for help):";
   cin.getline(input,sizeof(input));
@@ -364,43 +367,43 @@ void runCmdLineProgram(){
   }
   usrInput.push_back(input);
 	while(usrInput[0].compare("q")!=0 && usrInput[0].compare("quit")!=0){
-    RECURS=0;
+    		RECURS=0;
 		if(usrInput[0].compare("help")==0 || usrInput[0].compare("h")==0){
 			printInstructions();
 			cout<<"Please Enter:";
-      usrInput.pop_back();
+      			usrInput.pop_back();
 			cin.getline(input,sizeof(input));
-      for(unsigned int i=0;i<100;i++){
-        if(input[i]<91 && input[i]>64)//convert string to all lower case
-          input[i]+=32;
-      }
-      usrInput.push_back(input);
+      			for(unsigned int i=0;i<100;i++){
+        			if(input[i]<91 && input[i]>64)//convert string to all lower case
+          			input[i]+=32;
+      			}
+      			usrInput.push_back(input);
 		}
 		else if(usrInput[0].compare("search")==0 || usrInput[0].compare("1")==0){
 			inputQuery();
-      for(unsigned int j=0; j<dict.size();j++){
-        frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
-      }
-      search();
+      			for(unsigned int j=0; j<dict.size();j++){
+        			frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
+      			}
+			search();
 			cout<<"Please Enter (h for help):";
-      usrInput.pop_back();
-      cin.getline(input,sizeof(input));
-      for(unsigned int i=0;i<100;i++){
-        if(input[i]<91 && input[i]>64)//convert string to all lower case
-          input[i]+=32;
-      }
-      usrInput.push_back(input);
+      			usrInput.pop_back();
+      			cin.getline(input,sizeof(input));
+      			for(unsigned int i=0;i<100;i++){
+        			if(input[i]<91 && input[i]>64)//convert string to all lower case
+          			input[i]+=32;
+      			}
+      			usrInput.push_back(input);
 		}
 		else{
 			cout<<"\n**Invalid Input, try again."<<endl;
 			cout<<"Please Enter (h for help):";
-      usrInput.pop_back();
-      cin.getline(input,sizeof(input));
-      for(unsigned int i=0;i<100;i++){
-        if(input[i]<91 && input[i]>64)//convert string to all lower case
-          input[i]+=32;
-      }
-      usrInput.push_back(input);
+      			usrInput.pop_back();
+      			cin.getline(input,sizeof(input));
+      			for(unsigned int i=0;i<100;i++){
+        			if(input[i]<91 && input[i]>64)//convert string to all lower case
+          			input[i]+=32;
+      			}
+      			usrInput.push_back(input);
 		}
 	}//end while
 	cout<<"Bye Bye"<<endl;
