@@ -28,6 +28,7 @@ string getFileName();//gets file name to be processed
 int getM(string b,unsigned int endSize);//gets the value of m for the porter algorithm
 bool isVowel(string check, int index);//returns if a character is a Vowel
 bool endsIn(string word, string end);//boolean functions for seeing if a string ends in another string
+string stemString(string toStem);
 
 void stemPorterAlg();//main function for porter alg
 void porter1a(string& check);//porter step 1a
@@ -686,6 +687,16 @@ vector<string> processQuery(vector<string> query){
 		rmStopWords();
 		stemPorterAlg();
 		return currentFile;
+}
+
+string stemString(string toStem){
+	currentFile.clear();
+	stopWords.clear();
+	stopWordsHash.makeEmpty();
+	init();
+	currentFile.push_back(toStem);
+	stemPorterAlg();
+	return currentFile[0];
 }
 
 /*

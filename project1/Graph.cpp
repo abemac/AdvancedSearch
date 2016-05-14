@@ -265,17 +265,30 @@ Node* Graph::findNonVisitedVertice(){
 }
 
 bool Graph::containsVertice(string name){
+  bool returnVal=false;
   for(Node *n : vertices){
     if((n->getName()).compare(name)==0){//returns true if the names are equal
-      return true;
+      returnVal=true;
     }else if (name.back()==':'){//removes colon from end if needed and re-compares
       string name2 = name.substr(0,name.size()-1);
       if((n->getName()).compare(name2)==0){
-        return true;
+        returnVal=true;
       }
     }
+    // if(returnVal==false){
+    //   for(Node *n : vertices){
+    //     if(stemString((n->getName())).compare(name)==0){//returns true if the names are equal
+    //       returnVal=true;
+    //     }else if (name.back()==':'){//removes colon from end if needed and re-compares
+    //       string name2 = name.substr(0,name.size()-1);
+    //       if(stemString((n->getName())).compare(name2)==0){
+    //         returnVal=true;
+    //       }
+    //     }
+    //   }
+    // }
   }
-  return false;
+  return returnVal;
 }
 
 Node* Graph::findVertice(string name){
@@ -296,14 +309,4 @@ Node* Graph::findVertice(string name){
 
 vector<Node*>* Graph::getVertices(){
 	return &vertices;
-}
-
-
-bool Graph::existsInGraph(string node){
-  for( Node* n:vertices){
-    if((n->getName()).compare(node)==0){
-      return true;
-    }
-  }
-  return false;
 }

@@ -8,6 +8,7 @@ using namespace std;
 
 vector<string> dict;
 vector<string>query;
+vector<string> unproccesedQuery;
 vector<string> lastDoc;
 int lastDocNum=-1;
 const int MAX_RECUR_LIMIT = 3;
@@ -78,6 +79,7 @@ void inputQuery(){
   vector<string> tmp;
   tmp.push_back(input);
   query = splitString(tmp);
+  unproccesedQuery=query;
   query = processQuery(query);
 }
 double getQueryFrequency(string word){
@@ -301,15 +303,39 @@ void addSubtypes(){
   vector<string> temp;
 
   for(unsigned int i =0; i< query.size();i++){
-      if(graph.existsInGraph(query[i])){
+      if(graph.containsVertice(query[i])){
         temp= graph.citeSubtypes(query[i],3,1);
       }else{
         temp.clear();
       }
       for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
-          additions.push_back(temp[j]);
-
+          bool inAlready=false;
+          for(string s: query){
+            if(s.compare(temp[j])==0){
+              inAlready=true;
+            }else {
+              vector<string> tmp2;
+              tmp2.push_back(temp[j]);
+              tmp2= splitString(tmp2);
+              unsigned int count=0;
+              for(string s: tmp2){
+                for (string s2: query){
+                  if(s.compare(s2)==0){
+                    count++;
+                  }
+                }
+              }
+              if (count>=tmp2.size()){
+                inAlready=true;
+              }else{
+                inAlready=false;
+              }
+            }
+          }
+          if(!inAlready){
+            additions.push_back(temp[j]);
+          }
         }
         if(additions.size() == 3){
           break;
@@ -322,13 +348,17 @@ void addSubtypes(){
   }
 
   vector<string> clean = splitString(additions);
-  cout<<"Your query was appended with: ";
+  if(clean.size()>0){
+    cout<<"\nYour query was appended with: ";
+  }
   for(unsigned int k =0; k < clean.size(); k++){
     query.push_back(clean[k]);
     cout<<clean[k]<<" ";
   }
-  cout<<""<<endl;
-  processQuery(query);
+  if(clean.size()>0){
+    cout<<""<<endl;
+  }
+  query=processQuery(query);
   for(unsigned int j=0; j<dict.size();j++){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }

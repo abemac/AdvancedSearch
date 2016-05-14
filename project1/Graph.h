@@ -89,10 +89,6 @@ public:
 	*/
 	void commonAncestor(string sp1, string sp2,string sp3);
 
-	/*
-		returns true if node exists, false otherwise
-	*/
-	bool existsInGraph(string node);
 
 };
 
