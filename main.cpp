@@ -25,18 +25,18 @@ struct RANK{
   double distance;
 
 };
-void readFiles();
-int getIndex(string word);
+void readFiles();	//Function to read files
+int getIndex(string word);	//return index of the word that is in dict(vector).
 vector<string> splitString(vector<string> dirty);
-void runCmdLineProgram();
-void printInstructions();
-void inputQuery();
-void loadDict();
-bool isThere(string word);
-bool queryExists();
-double getFrequency(int i, string word);
-double getQueryFrequency(string word);
-void addSubtypes();
+void runCmdLineProgram();	//run command line interface
+void printInstructions();	//print out instructions after user input "h"
+void inputQuery();		
+void loadDict();		//read all files and build a dictionary to store all the unique words
+bool isThere(string word);	//check the word is in the dictionary
+bool queryExists();		//check all inputs are in dictionary
+double getFrequency(int i, string word);	//get frequency of the word in the file which index is i
+double getQueryFrequency(string word);		//get frequency of the word in input
+void addSubtypes();		
 vector<RANK> search();
 double computeDocDistance(int docNum);
 bool RANKcompare(RANK lhs, RANK rhs);
@@ -57,11 +57,6 @@ int main(){
     }
   }
   runCmdLineProgram();
-  // inputQuery();
-  // for(unsigned int j=0; j<dict.size();j++){
-  //   frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
-  // }
-  // search();
 
 return 0;
 }
