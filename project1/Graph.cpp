@@ -300,8 +300,8 @@ vector<Node*>* Graph::getVertices(){
 
 
 bool Graph::existsInGraph(string node){
-  for( string s:vertices){
-    if(s.compare(node)==0){
+  for( Node* n:vertices){
+    if((n->getName()).compare(node)==0){
       return true;
     }
   }

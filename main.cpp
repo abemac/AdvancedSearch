@@ -14,6 +14,7 @@ const int MAX_RECUR_LIMIT = 3;
 int RECURS=0;
 double T = .6;
 int NUM_DOCS=40;
+double infinity = std::numeric_limits<double>::infinity();
 double **frequency;   //frequency[0] = query frequencies
 //                       //frequency[1][0] = frequency of first document, word in dict[0]
 //                       //frequency[1][1] = frequency of first document, word in dict[1]
@@ -32,6 +33,7 @@ void printInstructions();
 void inputQuery();
 void loadDict();
 bool isThere(string word);
+bool queryExists();
 double getFrequency(int i, string word);
 double getQueryFrequency(string word);
 void addSubtypes();
@@ -39,9 +41,6 @@ vector<RANK> search();
 double computeDocDistance(int docNum);
 bool RANKcompare(RANK lhs, RANK rhs);
 void inputQuery();
-
-
-
 
 int main(){
   graphMain();
@@ -253,13 +252,13 @@ vector<RANK> search(){
     docRanks=search();
 
   }else{
-    cout<<"Document Ranking:"<<endl;
-    cout<<docRanks[0].doc<<": "<<docRanks[0].distance<<endl;
-    cout<<docRanks[1].doc<<": "<<docRanks[1].distance<<endl;
-    cout<<docRanks[2].doc<<": "<<docRanks[2].distance<<endl;
-    cout<<docRanks[3].doc<<": "<<docRanks[3].distance<<endl;
-    cout<<docRanks[4].doc<<": "<<docRanks[4].distance<<endl;
-    cout<<docRanks[5].doc<<": "<<docRanks[5].distance<<endl;
+    cout<<"\n     Document Ranking:"<<endl;
+    cout<<"Doc #"<<docRanks[0].doc<<" (distance = "<<docRanks[0].distance<<")"<<endl;
+    cout<<"Doc #"<<docRanks[1].doc<<" (distance = "<<docRanks[1].distance<<")"<<endl;
+    cout<<"Doc #"<<docRanks[2].doc<<" (distance = "<<docRanks[2].distance<<")"<<endl;
+    cout<<"Doc #"<<docRanks[3].doc<<" (distance = "<<docRanks[3].distance<<")"<<endl;
+    cout<<"Doc #"<<docRanks[4].doc<<" (distance = "<<docRanks[4].distance<<")"<<endl;
+    cout<<"Doc #"<<docRanks[5].doc<<" (distance = "<<docRanks[5].distance<<")\n"<<endl;
   }
   return docRanks;
 
@@ -267,12 +266,14 @@ vector<RANK> search(){
 
 
 double computeDocDistance(int docNum){
-  double distance=0;
-  for (unsigned int i = 0;i<dict.size();i++){
-    distance+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
-  }
-  distance = sqrt(distance);
-  return distance;
+  if(queryExists()){
+    double distance=0;
+    for (unsigned int i = 0;i<dict.size();i++){
+      distance+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
+    }
+    distance = sqrt(distance);
+    return distance;
+  }else return infinity;
 }
 
 
@@ -300,7 +301,7 @@ void addSubtypes(){
   vector<string> temp;
 
   for(unsigned int i =0; i< query.size();i++){
-      if(graph.existsInGraph(query[i]){
+      if(graph.existsInGraph(query[i])){
         temp= graph.citeSubtypes(query[i],3,1);
       }else{
         temp.clear();
@@ -328,6 +329,15 @@ void addSubtypes(){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
 
+}
+
+bool queryExists(){
+  for(string s: query){
+    if(isThere(s)){
+      return true;
+    }
+  }
+  return false;
 }
 
 void printInstructions(){
