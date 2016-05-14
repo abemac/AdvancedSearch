@@ -231,15 +231,15 @@ int getFrequency(int i, string word){	//return frequency of the word in the file
 
 
 
-bool RANKcompare(const RANK lhs, const RANK rhs) { return lhs.distance < rhs.distance; }
+bool RANKcompare(const RANK lhs, const RANK rhs) { return lhs.distance < rhs.distance; }	//compare distances of two RANKs
 
-vector<RANK> search(){
+vector<RANK> search(){	//return a sorted list of RANKs 
   vector<RANK> docRanks;
-  for(int i=1;i<41;i++){
+  for(int i=1;i<41;i++){	
     RANK tmp;
     tmp.doc=i;
-    tmp.distance=computeDocDistance(i);
-    docRanks.push_back(tmp);
+    tmp.distance=computeDocDistance(i);	//compute distance between query and the file,index of i
+    docRanks.push_back(tmp);		//add the RANK to the list
   }
   sort(docRanks.begin(),docRanks.end(),RANKcompare);
   //check if below Threshold T
@@ -263,7 +263,7 @@ vector<RANK> search(){
 }
 
 
-double computeDocDistance(int docNum){
+double computeDocDistance(int docNum){		//get distance between query and the file which index is docNum
   if(queryExists()){
     double distance=0;
     for (unsigned int i = 0;i<dict.size();i++){
@@ -276,7 +276,7 @@ double computeDocDistance(int docNum){
 
 
 
-vector<string> splitString(vector<string> dirty){
+vector<string> splitString(vector<string> dirty){	//split query to single words and return the vector of the processed query 
   vector<string> clean;
   for(unsigned int i=0;i<dirty.size();i++){
     string line = dirty[i];
@@ -299,14 +299,14 @@ void addSubtypes(){		//find and add subtypes of query
   vector<string> temp;
 
   for(unsigned int i =0; i< query.size();i++){
-      if(graph.existsInGraph(query[i])){
-        temp= graph.citeSubtypes(query[i],3,1);
+      if(graph.existsInGraph(query[i])){	//check if the query is in graph
+        temp= graph.citeSubtypes(query[i],3,1);	//get 3 oder-1 subtypes of the query
       }else{
         temp.clear();
       }
       for(unsigned int j=0;j<temp.size();j++){
-        if(additions.size() < 3){
-          additions.push_back(temp[j]);
+        if(additions.size() < 3){	//only read 3 subtypes
+          additions.push_back(temp[j]); 
 
         }
         if(additions.size() == 3){
@@ -321,12 +321,12 @@ void addSubtypes(){		//find and add subtypes of query
 
   vector<string> clean = splitString(additions);
   cout<<"Your query was appended with: ";
-  for(unsigned int k =0; k < clean.size(); k++){
+  for(unsigned int k =0; k < clean.size(); k++){	//display added subtypes 
     query.push_back(clean[k]);
     cout<<clean[k]<<" ";
   }
   cout<<""<<endl;
-  processQuery(query);
+  processQuery(query);	//stem query
   for(unsigned int j=0; j<dict.size();j++){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
