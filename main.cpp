@@ -10,12 +10,12 @@ vector<string> dict;	//vector for dictionary
 vector<string>query;	//vector for query
 vector<string> lastDoc;	//temp vector for last read file
 vector<string> unproccesedQuery;
-int lastDocNum=-1;
-const int MAX_RECUR_LIMIT = 3;
-int RECURS=0;
-double T = .6;
-int NUM_DOCS=40;
-double infinity = std::numeric_limits<double>::infinity();
+int lastDocNum=-1;//Used in compute frequency for effeciancy
+const int MAX_RECUR_LIMIT = 3;//for search
+int RECURS=0;//for search
+double T = .6;//Threshold for seraching in knowledge base
+int NUM_DOCS=40;//the number of documents in the "Texts" directory to search
+double infinity = std::numeric_limits<double>::infinity();//infinity
 double **frequency;   //frequency[0] = query frequencies
 //                       //frequency[1][0] = frequency of first document, word in dict[0]
 //                       //frequency[1][1] = frequency of first document, word in dict[1]
@@ -58,7 +58,7 @@ int main(){
   for (unsigned int i=1; i<41; i++){
     for(unsigned int j=0; j<dict.size();j++){
       if(wordCounts[i]!=0){
-        frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];
+        frequency[i][j]=getFrequency(i, dict[j])/wordCounts[i];//sets the frequencies
       }else{
         frequency[i][j]=infinity;
       }
@@ -82,7 +82,7 @@ void inputQuery(){
   vector<string> tmp;
   tmp.push_back(input);
   query = splitString(tmp);	//split user input to single words
-  unproccesedQuery=query;
+  unproccesedQuery=query;//used in search
   query = processQuery(query);	//stem query
 }
 double getQueryFrequency(string word){	//get frequency of the word in query
@@ -143,7 +143,7 @@ void loadDict(){
 
         word="";
   	}
-    wordCounts[i]=wordCount;
+    wordCounts[i]=wordCount;//stores the number of words in each file
     wordCount=0;
 
   	textfile.close();
@@ -247,15 +247,16 @@ vector<RANK> search(){	//return a sorted list of RANKs
     tmp.distance=computeDocDistance(i);	//compute distance between query and the file,index of i
     docRanks.push_back(tmp);		//add the RANK to the list
   }
-  sort(docRanks.begin(),docRanks.end(),RANKcompare);
+  sort(docRanks.begin(),docRanks.end(),RANKcompare);//sorts from low to high
   //check if below Threshold T
 
   if(docRanks[0].distance > T && RECURS< MAX_RECUR_LIMIT){
-    RECURS++;
+    RECURS++;//maximum of 3 times recursion
     addSubtypes();
-    docRanks=search();
+    docRanks=search();//search again with added subtypes if threshold was not met
 
   }else{
+    //prints out the found documents, along with returning them if needed
     cout<<"\n     Document Ranking:"<<endl;
     cout<<"Doc #"<<docRanks[0].doc<<" (distance = "<<docRanks[0].distance<<")"<<endl;
     cout<<"Doc #"<<docRanks[1].doc<<" (distance = "<<docRanks[1].distance<<")"<<endl;
@@ -272,7 +273,7 @@ vector<RANK> search(){	//return a sorted list of RANKs
 double computeDocDistance(int docNum){		//get distance between query and the file which index is docNum
   if(queryExists()){
     double distance=0;
-    for (unsigned int i = 0;i<dict.size();i++){
+    for (unsigned int i = 0;i<dict.size();i++){//Euclidian distance
       distance+=(frequency[0][i]-frequency[docNum][i])*(frequency[0][i]-frequency[docNum][i]);
     }
     distance = sqrt(distance);
@@ -289,11 +290,11 @@ vector<string> splitString(vector<string> dirty){	//split query to single words 
     unsigned int k=0;
     for(unsigned int j=0; j< line.size();j++){
         if(line[j] == '_' || line[j] == ' '){
-          clean.push_back(line.substr(k,j-k));
+          clean.push_back(line.substr(k,j-k));//push back everything except _ and ' '
               k=j+1;
         }
         if(j+1 == line.size()){
-          clean.push_back(line.substr(k,j-k+1));
+          clean.push_back(line.substr(k,j-k+1));//final
         }
     }
   }
@@ -308,7 +309,7 @@ void addSubtypes(){		//find and add subtypes of query
     toCheck.push_back(s);
   }
   for(string s : unproccesedQuery){
-    toCheck.push_back(s);
+    toCheck.push_back(s);//used unstemmed and stemmed to search graph
   }
 
   for(unsigned int i =0; i< toCheck.size();i++){
@@ -320,7 +321,7 @@ void addSubtypes(){		//find and add subtypes of query
       for(unsigned int j=0;j<temp.size();j++){
         if(additions.size() < 3){
           bool inAlready=false;
-          for(string s: toCheck){
+          for(string s: toCheck){//check if already in the query
             if(s.compare(temp[j])==0){
               inAlready=true;
             }else {
@@ -330,7 +331,7 @@ void addSubtypes(){		//find and add subtypes of query
               unsigned int count=0;
               for(string s: tmp2){
                 for (string s2: query){
-                  if(s.compare(s2)==0){
+                  if(s.compare(s2)==0){//Need to account for two word graph contents
                     count++;
                   }
                 }
@@ -342,7 +343,7 @@ void addSubtypes(){		//find and add subtypes of query
               }
             }
           }
-          if(!inAlready){
+          if(!inAlready){//if not alread in query, add to query
             additions.push_back(temp[j]);
           }
         }
@@ -358,17 +359,17 @@ void addSubtypes(){		//find and add subtypes of query
 
   vector<string> clean = splitString(additions);
   if(clean.size()>0){
-    cout<<"\nYour query was appended with: ";
+    cout<<"\nYour query was appended with: ";//print out appended query items
   }
   for(unsigned int k =0; k < clean.size(); k++){
-    query.push_back(clean[k]);
+    query.push_back(clean[k]);//add new items to query
     unproccesedQuery.push_back(clean[k]);
     cout<<clean[k]<<" ";
   }
   if(clean.size()>0){
     cout<<""<<endl;
   }
-  query=processQuery(query);
+  query=processQuery(query);//re-process query
   for(unsigned int j=0; j<dict.size();j++){
     frequency[0][j]=getQueryFrequency(dict[j])/query.size();//for query
   }
